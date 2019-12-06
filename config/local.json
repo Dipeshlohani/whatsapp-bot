@@ -1,0 +1,16 @@
+{
+  "app": {
+    "name": "Nepal Bot",
+    "port": 3601,
+    "secret": "KxwR4lVdN3VfqFRUS3dsWeccpB95VYS-",
+    "url": "http://localhost:3601",
+    "enableSocial": false
+  },
+  "db": {
+    "url": "mongodb://localhost:27017/whatsapp"
+  },
+  "jwt": {
+    "duration": 3600000,
+    "duration_long": 604800000
+  }
+}
