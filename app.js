@@ -10,7 +10,11 @@ const config = require("config");
 var routeManager = require("./routes");
 var app = express();
 
-mongoose.connect(config.get("db.url"), { useNewUrlParser: true, useFindAndModify: false });
+mongoose.connect(config.get("db.url"), {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true
+});
 console.warn = msg => {
   console.log("\x1b[33m", "WARNING!!! " + msg, "\x1b[0m");
 };
