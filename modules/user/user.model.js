@@ -10,6 +10,13 @@ const UserSchema = mongoose.Schema(
       type: String,
       $in: ["male", "female", "others"]
     },
+    whatsappName: {
+      type: String
+    },
+    phone: {
+      type: String,
+      required: true
+    },
     dob: {
       type: Date,
       required: true
