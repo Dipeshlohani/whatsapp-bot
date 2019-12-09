@@ -57,6 +57,10 @@ const UserSchema = mongoose.Schema(
         }
       }
     },
+    lang: {
+      type: String,
+      $in: ["en", "te"]
+    },
     isActive: {
       type: Boolean,
       required: false
