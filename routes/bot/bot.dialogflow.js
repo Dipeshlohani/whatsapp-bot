@@ -22,6 +22,11 @@ router.post("/", async (req, res, next) => {
     intentMap.set("Default Welcome Intent", () => {
         return welcome.sendResponse();
     });
+    
+    intentMap.set("InfoIntent", () => {
+        return welcome.sendResponse();
+    });
+
 
     if (agent.intent) {
         agent.handleRequest(intentMap);
