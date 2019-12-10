@@ -16,15 +16,15 @@ router.post("/", async (req, res, next) => {
   const welcome = new welcomeService(agent);
   let intentMap = new Map();
 
-  console.log("----> " + agent.originalRequest.payload.data.From);
-
+  //   console.log(agent.queryResult.parameters.person.name);
+  //   console.log("----> " + agent.originalRequest.payload.data.From);
   intentMap.set("Default Welcome Intent", () => {
     return welcome.sendResponse();
   });
   //   fs.writeFile(__dirname + "/../../play/dialogflow.json", JSON.stringify(req.body, null, 2));
-  intentMap.set("InfoIntent", () => {
-    return welcome.sendResponse();
-  });
+  //   intentMap.set("InfoIntent", () => {
+  //     return welcome.sendResponse();
+  //   });
 
   if (agent.intent) {
     agent.handleRequest(intentMap);
