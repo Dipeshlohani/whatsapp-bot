@@ -12,5 +12,9 @@
   "jwt": {
     "duration": 3600000,
     "duration_long": 604800000
+  },
+  "astronomy_api": {
+    "userId": "605706",
+    "apikey": "1db1024011269f2d80bd8bdd543b7f8c"
   }
 }

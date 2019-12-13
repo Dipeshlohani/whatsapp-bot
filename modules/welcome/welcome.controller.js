@@ -6,20 +6,11 @@ class Controller {
   }
   async getUser(payload) {
     let data = await UserModel.findOne({ phone: payload });
-
-    if (data) {
-      return data;
-    }
-    if (!data) {
-      return this.createUsingphone(payload);
-    }
+    if (data) return data;
+    return;
   }
   async createUsingphone(payload) {
-    let data = await UserModel.create({
-      phone: payload,
-      name: "dipesh",
-      gender: "male"
-    });
+    let data = await UserModel.create(payload);
     return data;
   }
 }

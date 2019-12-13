@@ -10,50 +10,47 @@ const UserSchema = mongoose.Schema(
       type: String,
       $in: ["male", "female", "others"]
     },
-    whatsappName: {
-      type: String
-    },
     phone: {
       type: String,
       required: true
     },
     dob: {
-      type: Date
-      // required: true
+      type: Date,
+      required: true
     },
     pob: {
       place: {
-        type: String
-        // required: true
+        type: String,
+        required: true
       },
       coordinates: {
-        longitute: {
-          type: Number
-          // required: true
+        longitude: {
+          type: Number,
+          required: true
         },
         latitude: {
-          type: Number
-          // required: true
+          type: Number,
+          required: true
         }
       }
     },
     gothra: {
-      type: String
-      // required: true
+      type: String,
+      required: true
     },
     currentLocation: {
       place: {
-        type: String
-        // required: true
+        type: String,
+        required: true
       },
       coordinates: {
-        longitute: {
-          type: Number
-          // required: true
+        longitude: {
+          type: Number,
+          required: true
         },
         latitude: {
-          type: Number
-          // required: true
+          type: Number,
+          required: true
         }
       }
     },

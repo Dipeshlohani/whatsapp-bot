@@ -21,10 +21,27 @@ router.post("/", async (req, res, next) => {
   intentMap.set("Default Welcome Intent", () => {
     return welcome.sendResponse();
   });
+
+  intentMap.set("Default Welcome Intent - select.number - custom", () => {
+    return welcome.setName();
+  });
+
+  intentMap.set("Default Welcome Intent - select.number - custom - custom", () => {
+    return welcome.setGender();
+  });
   //   fs.writeFile(__dirname + "/../../play/dialogflow.json", JSON.stringify(req.body, null, 2));
-  //   intentMap.set("InfoIntent", () => {
-  //     return welcome.sendResponse();
-  //   });
+  intentMap.set("InfoIntent", () => {
+    return welcome.saveUser();
+  });
+  intentMap.set("LanguageIntent", () => {
+    return welcome.setLanguage();
+  });
+  intentMap.set("GeneralIntent", () => {
+    return welcome.setUser();
+  });
+  //   intentMap.set("TeluguLanguageIntent",()=>{
+  //       return welcome.setLanguage();
+  //   })
 
   if (agent.intent) {
     agent.handleRequest(intentMap);
