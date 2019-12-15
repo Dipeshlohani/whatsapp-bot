@@ -1,58 +1,86 @@
 {
   "contexts": {
-    "defaultwelcomeintent-followup": {
-      "name": "defaultwelcomeintent-followup",
+    "gothralocation": {
+      "name": "gothralocation",
       "lifespan": 5,
       "parameters": {
-        "person": {
-          "name": "bibek"
-        },
-        "person.original": "bibek",
-        "gender": 0,
-        "gender.original": "0"
+        "gothra": "Bhardwaj",
+        "gothra.original": "Bhardwaj",
+        "currentlocation": "Bengaluru",
+        "currentlocation.original": "Bengaluru"
       }
     },
     "generic": {
       "name": "generic",
       "lifespan": 4,
       "parameters": {
-        "twilio_sender_id": "whatsapp:+9779867179344",
-        "number": [
-          1
-        ],
-        "number.original": [
-          "1"
-        ],
+        "twilio_sender_id": "whatsapp:+9779843598848",
+        "number": 1,
+        "number.original": "1",
         "person": {
-          "name": "bibek"
+          "name": "Dipesh Lohani"
         },
-        "person.original": "bibek",
-        "gender": 0,
-        "gender.original": "0"
+        "person.original": "Dipesh Lohani",
+        "gender": 1,
+        "gender.original": "1",
+        "date": "1997-01-01T12:00:00+05:45",
+        "date.original": "01 01 1997",
+        "time": "2019-12-15T09:34:00+05:45",
+        "time.original": "09:34",
+        "pob": "Delhi",
+        "pob.original": "Delhi",
+        "gothra": "Bhardwaj",
+        "gothra.original": "Bhardwaj",
+        "currentlocation": "Bengaluru",
+        "currentlocation.original": "Bengaluru"
       }
     },
-    "defaultwelcomeintent-selectnumber-custom-followup": {
-      "name": "defaultwelcomeintent-selectnumber-custom-followup",
-      "lifespan": 3,
+    "defaultwelcomeintent-selectnumber-custom-custom-custom-followup": {
+      "name": "defaultwelcomeintent-selectnumber-custom-custom-custom-followup",
+      "lifespan": 1,
       "parameters": {
-        "person": {
-          "name": "bibek"
-        },
-        "person.original": "bibek",
-        "gender": 0,
-        "gender.original": "0"
+        "date": "1997-01-01T12:00:00+05:45",
+        "date.original": "01 01 1997",
+        "time": "2019-12-15T09:34:00+05:45",
+        "time.original": "09:34",
+        "pob": "Delhi",
+        "pob.original": "Delhi",
+        "gothra": "Bhardwaj",
+        "gothra.original": "Bhardwaj",
+        "currentlocation": "Bengaluru",
+        "currentlocation.original": "Bengaluru"
       }
     },
-    "default": {
-      "name": "default",
-      "lifespan": 3,
+    "pobintent-followup": {
+      "name": "pobintent-followup",
       "parameters": {
-        "person": {
-          "name": "bibek"
-        },
-        "person.original": "bibek",
-        "gender": 0,
-        "gender.original": "0"
+        "pob": "Delhi",
+        "pob.original": "Delhi",
+        "gothra": "Bhardwaj",
+        "gothra.original": "Bhardwaj",
+        "currentlocation": "Bengaluru",
+        "currentlocation.original": "Bengaluru"
+      }
+    },
+    "gothraintent-followup": {
+      "name": "gothraintent-followup",
+      "lifespan": 4,
+      "parameters": {
+        "gothra": "Bhardwaj",
+        "gothra.original": "Bhardwaj",
+        "currentlocation": "Bengaluru",
+        "currentlocation.original": "Bengaluru"
+      }
+    },
+    "defaultwelcomeintent-selectnumber-custom-custom-custom-custom-custom-followup": {
+      "name": "defaultwelcomeintent-selectnumber-custom-custom-custom-custom-custom-followup",
+      "parameters": {
+        "pob": "Delhi",
+        "pob.original": "Delhi",
+        "gothra": "Bhardwaj",
+        "gothra.original": "Bhardwaj",
+        "currentlocation": "Bengaluru",
+        "currentlocation.original": "Bengaluru"
       }
     },
     "__system_counters__": {
@@ -60,66 +88,94 @@
       "parameters": {
         "no-input": 0,
         "no-match": 0,
-        "gender": 0,
-        "gender.original": "0"
+        "currentlocation": "Bengaluru",
+        "currentlocation.original": "Bengaluru"
       }
     }
   },
-  "session": "projects/astrobot-smynrv/agent/sessions/388c0f76-b548-48ee-b327-28c96b94c97b",
+  "session": "projects/astrobot-smynrv/agent/sessions/f82462fd-ead2-4d83-90a6-ec0c320d09ed",
   "inputContexts": {
-    "defaultwelcomeintent-followup": {
-      "name": "defaultwelcomeintent-followup",
+    "gothralocation": {
+      "name": "gothralocation",
       "lifespan": 5,
       "parameters": {
-        "person": {
-          "name": "bibek"
-        },
-        "person.original": "bibek",
-        "gender": 0,
-        "gender.original": "0"
+        "gothra": "Bhardwaj",
+        "gothra.original": "Bhardwaj",
+        "currentlocation": "Bengaluru",
+        "currentlocation.original": "Bengaluru"
       }
     },
     "generic": {
       "name": "generic",
       "lifespan": 4,
       "parameters": {
-        "twilio_sender_id": "whatsapp:+9779867179344",
-        "number": [
-          1
-        ],
-        "number.original": [
-          "1"
-        ],
+        "twilio_sender_id": "whatsapp:+9779843598848",
+        "number": 1,
+        "number.original": "1",
         "person": {
-          "name": "bibek"
+          "name": "Dipesh Lohani"
         },
-        "person.original": "bibek",
-        "gender": 0,
-        "gender.original": "0"
+        "person.original": "Dipesh Lohani",
+        "gender": 1,
+        "gender.original": "1",
+        "date": "1997-01-01T12:00:00+05:45",
+        "date.original": "01 01 1997",
+        "time": "2019-12-15T09:34:00+05:45",
+        "time.original": "09:34",
+        "pob": "Delhi",
+        "pob.original": "Delhi",
+        "gothra": "Bhardwaj",
+        "gothra.original": "Bhardwaj",
+        "currentlocation": "Bengaluru",
+        "currentlocation.original": "Bengaluru"
       }
     },
-    "defaultwelcomeintent-selectnumber-custom-followup": {
-      "name": "defaultwelcomeintent-selectnumber-custom-followup",
-      "lifespan": 3,
+    "defaultwelcomeintent-selectnumber-custom-custom-custom-followup": {
+      "name": "defaultwelcomeintent-selectnumber-custom-custom-custom-followup",
+      "lifespan": 1,
       "parameters": {
-        "person": {
-          "name": "bibek"
-        },
-        "person.original": "bibek",
-        "gender": 0,
-        "gender.original": "0"
+        "date": "1997-01-01T12:00:00+05:45",
+        "date.original": "01 01 1997",
+        "time": "2019-12-15T09:34:00+05:45",
+        "time.original": "09:34",
+        "pob": "Delhi",
+        "pob.original": "Delhi",
+        "gothra": "Bhardwaj",
+        "gothra.original": "Bhardwaj",
+        "currentlocation": "Bengaluru",
+        "currentlocation.original": "Bengaluru"
       }
     },
-    "default": {
-      "name": "default",
-      "lifespan": 3,
+    "pobintent-followup": {
+      "name": "pobintent-followup",
       "parameters": {
-        "person": {
-          "name": "bibek"
-        },
-        "person.original": "bibek",
-        "gender": 0,
-        "gender.original": "0"
+        "pob": "Delhi",
+        "pob.original": "Delhi",
+        "gothra": "Bhardwaj",
+        "gothra.original": "Bhardwaj",
+        "currentlocation": "Bengaluru",
+        "currentlocation.original": "Bengaluru"
+      }
+    },
+    "gothraintent-followup": {
+      "name": "gothraintent-followup",
+      "lifespan": 4,
+      "parameters": {
+        "gothra": "Bhardwaj",
+        "gothra.original": "Bhardwaj",
+        "currentlocation": "Bengaluru",
+        "currentlocation.original": "Bengaluru"
+      }
+    },
+    "defaultwelcomeintent-selectnumber-custom-custom-custom-custom-custom-followup": {
+      "name": "defaultwelcomeintent-selectnumber-custom-custom-custom-custom-custom-followup",
+      "parameters": {
+        "pob": "Delhi",
+        "pob.original": "Delhi",
+        "gothra": "Bhardwaj",
+        "gothra.original": "Bhardwaj",
+        "currentlocation": "Bengaluru",
+        "currentlocation.original": "Bengaluru"
       }
     },
     "__system_counters__": {
@@ -127,8 +183,8 @@
       "parameters": {
         "no-input": 0,
         "no-match": 0,
-        "gender": 0,
-        "gender.original": "0"
+        "currentlocation": "Bengaluru",
+        "currentlocation.original": "Bengaluru"
       }
     }
   }

@@ -24,7 +24,6 @@ class Welcome {
     }
   }
   async setLanguage() {
-    console.log(this.agent.contexts[0].parameters.number);
     if (this.agent.contexts[0].parameters.number == 1) {
       this.agent.context.set({
         name: "getUser",
@@ -81,7 +80,6 @@ class Welcome {
   }
 
   async setUser() {
-    console.log(this.agent.parameters);
     let { number, name } = this.agent.parameters;
     if (number === 2 && !name) {
       this.agent.add("Enter your name");
@@ -106,10 +104,6 @@ class Welcome {
   }
 
   async setGender() {
-    fs.writeFile(
-      __dirname + "/../../play/dialogflow.json",
-      JSON.stringify(this.agent.context, null, 2)
-    );
     let { gender } = this.agent.parameters;
     let g;
     if (gender === 1) {
@@ -119,9 +113,48 @@ class Welcome {
     } else if (gender === 3) {
       g = "Others";
     }
-    console.log(this.agent.parameters);
     this.agent.add(
-      `(3 out of 7) Your Name:${this.agent.context.contexts.generic.parameters.person.name}, Gender:${g}. Please enter -1 to change Gender. Type 0 to start from Beginning. What is your Date of Birth? Please enter in DD MM YYYY format. Ex: 04 03 1985.`
+      `(3 out of 7) Your Name:${this.agent.context.contexts.generic.parameters.person.name}, Gender:${g}. Please enter -1 to change Gender. Type 0 to start from Beginning. What is your Date of Birth? Please enter in YYYY-MM-DD format. Ex: 1995-01-05.`
+    );
+  }
+
+  async setDate() {
+    let { date } = this.agent.parameters;
+    date = date.split("T")[0];
+    this.agent.add(
+      `(4 out of 7):Your Date of Birth is ${date} Please enter -1 to change last input. 0 to start from beginning. What is your time of birth? Please enter in 24 hours format 24HH:MM. ex: 06:30 or 18:01`
+    );
+  }
+  async setTime() {
+    let { time } = this.agent.parameters;
+    time = time.split("T")[1];
+    time = time.split("+")[0];
+    this.agent.add(
+      `(5 out of 7) You entered ${time} Please enter -1 to change last input. 0 to start from beginning. What is your place of birth? Enter the city/town name. Include state,region &country for locations out India. Ex: Chirala, London, U.K.`
+    );
+  }
+  async setPlace() {
+    let { pob } = this.agent.parameters;
+    this.agent.add(
+      `(6 out of 7) You entered ${pob} as your birth place.  Please enter -1 to change last input. 0 to start from beginning.  What is your Gothra?`
+    );
+  }
+  async setGothra() {
+    let { gothra } = this.agent.parameters;
+    this.agent.add(
+      `(7 out of 7) You entered ${gothra} as your Gothra.  Please enter -1 to change last input. 0 to start from beginning.  What is your current location?`
+    );
+  }
+  async setCurrentLocation() {
+    let userdb = await welcomeController.saveDetails(
+      this.agent.context.contexts.generic.parameters,
+      this.agent.originalRequest.payload.data.From.replace("whatsapp:", "")
+    );
+    //API CALL HERE
+    let data = await welcomeUtils.getAstroDetails(userdb);
+    console.log(data);
+    this.agent.add(
+      `As per your inputs your rasi: ${data.sign}, Nakshtra: ${data.Naksahtra}. You will receive daily astrology prediction from us.`
     );
   }
 }

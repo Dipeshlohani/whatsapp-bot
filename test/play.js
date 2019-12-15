@@ -1,10 +1,13 @@
 const axios = require("axios");
 const btoa = require("btoa");
-const userId = "605706";
-const apikey = "1db1024011269f2d80bd8bdd543b7f8c";
+const config = require("config");
+// const userId = "605706";
+// const apikey = "1db1024011269f2d80bd8bdd543b7f8c";
+const { userId, apikey } = config.get("astronomy_api");
+
 let data = {
-  place: "mumbai",
-  maxRows: 4
+  place: "nepalgunj",
+  maxRows: 1
 };
 function test() {
   axios({

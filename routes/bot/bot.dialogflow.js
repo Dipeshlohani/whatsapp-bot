@@ -39,6 +39,22 @@ router.post("/", async (req, res, next) => {
   intentMap.set("GeneralIntent", () => {
     return welcome.setUser();
   });
+  intentMap.set("DateIntent", () => {
+    return welcome.setDate();
+  });
+  intentMap.set("TimeIntent", () => {
+    return welcome.setTime();
+  });
+  intentMap.set("POBIntent", () => {
+    return welcome.setPlace();
+  });
+  intentMap.set("GothraIntent", () => {
+    return welcome.setGothra();
+  });
+  intentMap.set("LocationIntent", () => {
+    return welcome.setCurrentLocation();
+  });
+
   //   intentMap.set("TeluguLanguageIntent",()=>{
   //       return welcome.setLanguage();
   //   })
