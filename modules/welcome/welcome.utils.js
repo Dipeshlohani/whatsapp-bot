@@ -23,15 +23,14 @@ exports.getGeoLocation = async payload => {
 };
 
 exports.getAstroDetails = async payload => {
-  console.log(typeof payload.dob, payload.dob, "---");
+  // console.log(typeof payload.dob, payload.dob, "---");
+  let date = new Date(payload.dob);
 
-  let dob = payload.dob;
-
-  let year = dob.split("-")[0];
-  let month = dob.split("-")[1];
-  let day = dob.split("-")[2].split("T")[0];
-  let hour = dob.split("T")[1].split(":")[0];
-  let min = dob.split("T")[1].split(":")[1];
+  let year = date.getFullYear();
+  let month = date.getMonth() + 1;
+  let day = date.getDay();
+  let hour = date.getHours();
+  let min = date.getMinutes();
 
   console.log(payload);
 

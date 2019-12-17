@@ -16,5 +16,9 @@
   "astronomy_api": {
     "userId": "605706",
     "apikey": "1db1024011269f2d80bd8bdd543b7f8c"
+  },
+  "twilio_api": {
+    "accountSid": "AC9061e052a18ddac0c6d43a9874753cd4",
+    "authToken": "2b39562f743c01ebd8bdbac91b2595ac"
   }
 }

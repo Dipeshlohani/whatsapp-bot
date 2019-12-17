@@ -1,5 +1,6 @@
 const welcomeController = require("./welcome.controller");
 const welcomeUtils = require("./welcome.utils");
+const twilio = require("../../services/twilio");
 const fs = require("fs");
 class Welcome {
   constructor(agent) {
@@ -18,27 +19,28 @@ class Welcome {
         name: "DefaultWelcomeIntent-followup",
         lifespan: 1
       });
+      let message = " Enter 1 for English Enter 2 for Telugu";
+      twilio.sendSingleMessage(phone, message);
       this.agent.add(
-        "Hi there I am A.I. Pundit powered by OnMyMobile. I will send daily predictions, do custom puja as per astrology predictions and suggest a seva in nearby temple based on your birth chart. \n Enter 1 for English Enter 2 for Telugu"
+        "Hi there I am A.I. Pundit powered by OnMyMobile. I will send daily predictions, do custom puja as per astrology predictions and suggest a seva in nearby temple based on your birth chart."
       );
     }
   }
   async setLanguage() {
-    if (this.agent.contexts[0].parameters.number == 1) {
-      this.agent.context.set({
-        name: "getUser",
-        lifespan: 1,
-        parameters: {
-          value: this.agent.contexts[0].parameters.number
-        }
-      });
+    if (
+      this.agent.contexts[0].parameters.number == 1 ||
+      this.agent.contexts[0].parameters.number == 0
+    ) {
+      let phone = this.agent.originalRequest.payload.data.From;
+      phone = phone.replace("whatsapp:", "");
+      let message =
+        "(1 out of 7) What is your name ? Please provide your full name like Krishna Chaintanya. ";
+      twilio.sendSingleMessage(phone, message);
       this.agent.add(
-        "We need your Name, Gender, Date & time of birth, Gothra and current location to get started. Lets get your started. Alternatively you can fill this form instead of answering the question one after another. Select 1 for Form or 2 to fill manually"
+        "We need your Name, Gender, Date & time of birth, Gothra and current location to get started. Lets get your started. Alternatively you can fill this form instead of answering the question one after another."
       );
     } else if (this.agent.contexts[0].parameters.number == 2) {
       this.agent.add("Telugu currently not supported.");
-    } else {
-      this.agent.add("Sorry! I cannot get that language please enter again.");
     }
   }
   async saveUser() {
@@ -73,7 +75,10 @@ class Welcome {
       },
       lang: parameters.Language
     };
-    await welcomeController.createUsingphone(userDetail);
+    let userdb = await welcomeController.createUsingphone(userDetail);
+    let data = await welcomeUtils.getAstroDetails(userdb);
+    let message = `As per your inputs your rasi: ${data.sign}, Nakshtra: ${data.Naksahtra}. You will receive daily astrology prediction from us.`;
+    twilio.sendSingleMessage(phone, message);
     this.agent.add(
       "Hi there I am A.I.Pundit powered by OnMyMobile. I will send daily astrology predictions, do custom puja as per astrology predictions and suggest a seva in nearby temple based on your birth chart"
     );
@@ -105,6 +110,7 @@ class Welcome {
 
   async setGender() {
     let { gender } = this.agent.parameters;
+
     let g;
     if (gender === 1) {
       g = "Male";
@@ -112,6 +118,9 @@ class Welcome {
       g = "Female";
     } else if (gender === 3) {
       g = "Others";
+    } else {
+      this.agent.add("Please enter 1 for Male. 2 for Female. 3 for others");
+      return;
     }
     this.agent.add(
       `(3 out of 7) Your Name:${this.agent.context.contexts.generic.parameters.person.name}, Gender:${g}. Please enter -1 to change Gender. Type 0 to start from Beginning. What is your Date of Birth? Please enter in YYYY-MM-DD format. Ex: 1995-01-05.`
@@ -120,10 +129,15 @@ class Welcome {
 
   async setDate() {
     let { date } = this.agent.parameters;
-    date = date.split("T")[0];
-    this.agent.add(
-      `(4 out of 7):Your Date of Birth is ${date} Please enter -1 to change last input. 0 to start from beginning. What is your time of birth? Please enter in 24 hours format 24HH:MM. ex: 06:30 or 18:01`
-    );
+    console.log(date);
+    if (typeof new Date(date) === "object") {
+      date = date.split("T")[0];
+      this.agent.add(
+        `(4 out of 7):Your Date of Birth is ${date} Please enter -1 to change last input. 0 to start from beginning. What is your time of birth? Please enter in 24 hours format 24HH:MM. ex: 06:30 or 18:01`
+      );
+    } else {
+      this.agent.add("Please enter a valid Date of birth.");
+    }
   }
   async setTime() {
     let { time } = this.agent.parameters;

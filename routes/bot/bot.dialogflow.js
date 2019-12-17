@@ -22,6 +22,10 @@ router.post("/", async (req, res, next) => {
     return welcome.sendResponse();
   });
 
+  intentMap.set("Default Welcome Intent - select.number", () => {
+    return welcome.setLanguage();
+  });
+
   intentMap.set("Default Welcome Intent - select.number - custom", () => {
     return welcome.setName();
   });
@@ -33,9 +37,9 @@ router.post("/", async (req, res, next) => {
   intentMap.set("InfoIntent", () => {
     return welcome.saveUser();
   });
-  intentMap.set("LanguageIntent", () => {
-    return welcome.setLanguage();
-  });
+  // intentMap.set("LanguageIntent", () => {
+  //   return welcome.setLanguage();
+  // });
   intentMap.set("GeneralIntent", () => {
     return welcome.setUser();
   });
