@@ -12,5 +12,13 @@
   "jwt": {
     "duration": 3600000,
     "duration_long": 604800000
+  },
+  "astronomy_api": {
+    "userId": "605673",
+    "apikey": "51295769fedcce04bd57e902d9f931a3"
+  },
+  "twilio_api": {
+    "accountSid": "AC9061e052a18ddac0c6d43a9874753cd4",
+    "authToken": "2b39562f743c01ebd8bdbac91b2595ac"
   }
 }
