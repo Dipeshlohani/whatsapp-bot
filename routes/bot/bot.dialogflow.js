@@ -33,7 +33,6 @@ router.post("/", async (req, res, next) => {
   intentMap.set("Default Welcome Intent - select.number - custom - custom", () => {
     return welcome.setGender();
   });
-  //   fs.writeFile(__dirname + "/../../play/dialogflow.json", JSON.stringify(req.body, null, 2));
   intentMap.set("InfoIntent", () => {
     return welcome.saveUser();
   });
@@ -49,6 +48,7 @@ router.post("/", async (req, res, next) => {
   intentMap.set("TimeIntent", () => {
     return welcome.setTime();
   });
+
   intentMap.set("POBIntent", () => {
     return welcome.setPlace();
   });

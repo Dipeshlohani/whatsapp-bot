@@ -15,8 +15,26 @@ const UserSchema = mongoose.Schema(
       required: true
     },
     dob: {
-      type: Date,
-      required: true
+      year: {
+        type: String,
+        required: true
+      },
+      month: {
+        type: String,
+        required: true
+      },
+      day: {
+        type: String,
+        required: true
+      },
+      hour: {
+        type: String,
+        required: true
+      },
+      min: {
+        type: String,
+        required: true
+      }
     },
     pob: {
       place: {

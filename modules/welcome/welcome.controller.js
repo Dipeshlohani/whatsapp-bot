@@ -12,14 +12,22 @@ class Controller {
   }
 
   async saveDetails(payload, phone) {
-    let gender, dob;
+    let gender, year, month, day, hour, min, dob;
     gender = payload["gender.original"];
     if (gender == "1") gender = "Male";
     if (gender == "2") gender = "Female";
     if (gender == "3") gender = "Others";
-    //TODO DATE TIME
-    dob = payload.date.split("T")[0] + " " + payload["time.original"];
-    dob = new Date(dob);
+
+    let date = payload.date.split("T")[0].split("-");
+    let time = payload["time.original"].split(":");
+    dob = {
+      year: date[0],
+      month: date[1],
+      day: date[2],
+      hour: time[0],
+      min: time[1]
+    };
+    console.log(dob, "--this is dob--");
     let pob = await Utils.getGeoLocation(payload["pob.original"]);
     pob = {
       place: payload["pob.original"],

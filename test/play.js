@@ -6,21 +6,32 @@ const config = require("config");
 const { userId, apikey } = config.get("astronomy_api");
 
 let data = {
-  place: "nepalgunj",
-  maxRows: 1
+  day: 11,
+  month: 12,
+  year: 1997,
+  hour: 08,
+  min: 35,
+  lat: 28.05,
+  lon: 81.61667,
+  tzone: 5.5
 };
+
 function test() {
   axios({
     method: "POST",
-    url: "https://json.astrologyapi.com/v1/geo_details",
+    url: "https://json.astrologyapi.com/v1/daily_nakshatra_prediction/next",
     headers: {
       authorization: "Basic " + btoa(userId + ":" + apikey),
       "Content-Type": "application/json"
     },
     data: JSON.stringify(data)
-  }).then(Response => {
-    console.log(Response.data.geonames);
-  });
+  })
+    .then(Response => {
+      console.log(Response.data);
+    })
+    .catch(e => {
+      console.log(e);
+    });
 }
 
 test();

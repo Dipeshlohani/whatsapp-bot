@@ -149,6 +149,7 @@ class Welcome {
   }
   async setPlace() {
     let { pob } = this.agent.parameters;
+
     this.agent.add(
       `(6 out of 7) You entered ${pob} as your birth place.  Please enter -1 to change last input. 0 to start from beginning.  What is your Gothra?`
     );
@@ -160,16 +161,20 @@ class Welcome {
     );
   }
   async setCurrentLocation() {
-    let userdb = await welcomeController.saveDetails(
+    let { pob, dob } = await welcomeController.saveDetails(
       this.agent.context.contexts.generic.parameters,
       this.agent.originalRequest.payload.data.From.replace("whatsapp:", "")
     );
     //API CALL HERE
-    let data = await welcomeUtils.getAstroDetails(userdb);
-    console.log(data);
+    let { sign, Naksahtra } = await welcomeUtils.getAstroDetails({ pob, dob });
+    // console.log(data);
     this.agent.add(
-      `As per your inputs your rasi: ${data.sign}, Nakshtra: ${data.Naksahtra}. You will receive daily astrology prediction from us.`
+      `As per your inputs your rasi: ${sign}, Nakshtra: ${Naksahtra}. You will receive daily astrology prediction from us.`
     );
+  }
+
+  async getNakshatra({ pob, dob }) {
+    await welcomeUtils.getDailyNakshatraPrediction({ pob, dob });
   }
 }
 

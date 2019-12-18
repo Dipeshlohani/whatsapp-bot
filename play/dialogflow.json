@@ -1,0 +1,19 @@
+{
+  "source": "twilio",
+  "payload": {
+    "data": {
+      "SmsStatus": "received",
+      "MessageSid": "SM3f07b3495f72d74c2359f3e5dc850da2",
+      "ApiVersion": "2010-04-01",
+      "From": "whatsapp:+9779867179344",
+      "AccountSid": "AC9061e052a18ddac0c6d43a9874753cd4",
+      "To": "whatsapp:+14155238886",
+      "NumMedia": "0",
+      "SmsMessageSid": "SM3f07b3495f72d74c2359f3e5dc850da2",
+      "NumSegments": "1",
+      "SmsSid": "SM3f07b3495f72d74c2359f3e5dc850da2",
+      "Body": "-1"
+    },
+    "source": "twilio"
+  }
+}
