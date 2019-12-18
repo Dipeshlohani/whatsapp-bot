@@ -1,3 +1,7 @@
+#AstroBot
+config/
+yarn.lock
+
 # Logs
 logs
 *.log
