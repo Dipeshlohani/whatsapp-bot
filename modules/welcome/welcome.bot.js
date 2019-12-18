@@ -1,7 +1,6 @@
 const welcomeController = require("./welcome.controller");
 const welcomeUtils = require("./welcome.utils");
 const twilio = require("../../services/twilio");
-const fs = require("fs");
 class Welcome {
   constructor(agent) {
     this.agent = agent;
@@ -96,13 +95,7 @@ class Welcome {
 
   async setName() {
     let { name } = this.agent.parameters.person;
-    // this.agent.context.set({
-    //   name: "DefaultWelcomeIntent-selectnumber-custom-followup",
-    //   lifespan: 5,
-    //   parameters: {
-    //     value: this.agent.contexts[0].parameters.person
-    //   }
-    // });
+ 
     this.agent.add(
       `(2 out of 7) You have entered ${name}. You can enter -1 if you want to correct this. What is your Gender. Please enter 1 for Male. 2 for Female. 3 for others`
     );
