@@ -129,7 +129,6 @@ class Welcome {
 
   async setDate() {
     let { date } = this.agent.parameters;
-    console.log(date);
     if (typeof new Date(date) === "object") {
       date = date.split("T")[0];
       this.agent.add(
@@ -167,7 +166,6 @@ class Welcome {
     );
     //API CALL HERE
     let { sign, Naksahtra } = await welcomeUtils.getAstroDetails({ pob, dob });
-    // console.log(data);
     this.agent.add(
       `As per your inputs your rasi: ${sign}, Nakshtra: ${Naksahtra}. You will receive daily astrology prediction from us.`
     );

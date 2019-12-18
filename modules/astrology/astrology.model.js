@@ -1,12 +1,9 @@
 const mongoose = require("mongoose");
-const { objectId } = mongoose.Schema;
+const { ObjectId } = mongoose.Schema.Types;
 
 const AstroSchema = mongoose.Schema(
   {
-    user: {
-      type: objectId,
-      ref: "User"
-    },
+    user: { type: ObjectId, ref: "User" },
     birth_moon_sign: {
       type: String,
       required: true

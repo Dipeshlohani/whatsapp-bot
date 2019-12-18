@@ -2,9 +2,7 @@ const UserModel = require("../user/user.model");
 const Utils = require("./welcome.utils");
 
 class Controller {
-  async saveUser(payload) {
-    console.log(payload);
-  }
+
   async getUser(payload) {
     let data = await UserModel.findOne({ phone: payload });
     if (data) return data;
@@ -27,7 +25,6 @@ class Controller {
       hour: time[0],
       min: time[1]
     };
-    console.log(dob, "--this is dob--");
     let pob = await Utils.getGeoLocation(payload["pob.original"]);
     pob = {
       place: payload["pob.original"],

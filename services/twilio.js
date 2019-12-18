@@ -4,7 +4,6 @@ const { accountSid, authToken } = config.get("twilio_api");
 const client = require("twilio")(accountSid, authToken);
 class twilioNotify {
   async sendSingleMessage(phone, message) {
-    console.log(phone);
     await client.messages
       .create({
         body: message,
