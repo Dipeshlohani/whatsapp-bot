@@ -2,7 +2,6 @@ const router = require("express").Router();
 
 const { WebhookClient } = require("dialogflow-fulfillment");
 const { dialogflow } = require("actions-on-google");
-const fs = require("fs");
 
 const welcomeService = require("../../modules/welcome/welcome.bot");
 
