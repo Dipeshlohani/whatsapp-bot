@@ -19,3 +19,8 @@ class twilioNotify {
 }
 
 module.exports = new twilioNotify();
+
+// let phone = +9779843598848;
+// let message = "Hi";
+// const a = new twilioNotify();
+// a.sendSingleMessage(phone, message);

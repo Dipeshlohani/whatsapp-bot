@@ -29,6 +29,10 @@ const AstroSchema = mongoose.Schema(
         type: String,
         required: true
       },
+      luck: {
+        type: String,
+        required: true
+      },
       personal_life: {
         type: String,
         required: true
