@@ -10,14 +10,10 @@ class Controller {
   }
 
   async saveDetails(payload, phone) {
-    let gender, year, month, day, hour, min, dob;
-    gender = payload["gender.original"];
-    if (gender == "1") gender = "Male";
-    if (gender == "2") gender = "Female";
-    if (gender == "3") gender = "Others";
+    let dob;
 
     let date = payload.date.split("T")[0].split("-");
-    let time = payload["time.original"].split(":");
+    let time = payload.time.split(":");
     dob = {
       year: date[0],
       month: date[1],
@@ -25,17 +21,17 @@ class Controller {
       hour: time[0],
       min: time[1]
     };
-    let pob = await Utils.getGeoLocation(payload["pob.original"]);
+    let pob = await Utils.getGeoLocation(payload.p_o_b);
     pob = {
-      place: payload["pob.original"],
+      place: payload.p_o_b,
       coordinates: {
         longitude: pob.longitude,
         latitude: pob.latitude
       }
     };
-    let currentLocation = await Utils.getGeoLocation(payload["currentlocation.original"]);
+    let currentLocation = await Utils.getGeoLocation(payload.current_location);
     currentLocation = {
-      place: payload["currentlocation.original"],
+      place: payload.current_location,
       coordinates: {
         longitude: currentLocation.longitude,
         latitude: currentLocation.latitude
@@ -43,12 +39,12 @@ class Controller {
     };
 
     let obj = {
-      name: payload["person.original"],
-      gender,
+      name: payload.name,
+      gender: payload.gender,
       phone,
       dob,
       pob,
-      gothra: payload["gothra.original"],
+      gothra: payload.gothra,
       currentLocation
     };
     let userdb = await this.createUsingphone(obj);

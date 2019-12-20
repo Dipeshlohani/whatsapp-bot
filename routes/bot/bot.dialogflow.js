@@ -15,52 +15,19 @@ router.post("/", async (req, res, next) => {
   const welcome = new welcomeService(agent);
   let intentMap = new Map();
 
-  //   console.log(agent.queryResult.parameters.person.name);
   //   console.log("----> " + agent.originalRequest.payload.data.From);
+
   intentMap.set("Default Welcome Intent", () => {
     return welcome.sendResponse();
   });
 
-  intentMap.set("Default Welcome Intent - select.number", () => {
-    return welcome.setLanguage();
-  });
-
-  intentMap.set("Default Welcome Intent - select.number - custom", () => {
-    return welcome.setName();
-  });
-
-  intentMap.set("Default Welcome Intent - select.number - custom - custom", () => {
-    return welcome.setGender();
-  });
   intentMap.set("InfoIntent", () => {
     return welcome.saveUser();
   });
-  // intentMap.set("LanguageIntent", () => {
-  //   return welcome.setLanguage();
-  // });
-  intentMap.set("GeneralIntent", () => {
-    return welcome.setUser();
-  });
-  intentMap.set("DateIntent", () => {
-    return welcome.setDate();
-  });
-  intentMap.set("TimeIntent", () => {
-    return welcome.setTime();
-  });
 
-  intentMap.set("POBIntent", () => {
-    return welcome.setPlace();
-  });
-  intentMap.set("GothraIntent", () => {
-    return welcome.setGothra();
-  });
   intentMap.set("LocationIntent", () => {
-    return welcome.setCurrentLocation();
+    return welcome.getUserInfo();
   });
-
-  //   intentMap.set("TeluguLanguageIntent",()=>{
-  //       return welcome.setLanguage();
-  //   })
 
   if (agent.intent) {
     agent.handleRequest(intentMap);
