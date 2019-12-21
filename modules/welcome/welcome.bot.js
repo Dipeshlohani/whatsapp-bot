@@ -19,43 +19,22 @@ class Welcome {
   }
 
   async saveUser() {
-    let phone = this.agent.originalRequest.payload.data.From;
-    phone = phone.replace("whatsapp:", "");
-    let parameters = this.agent.parameters;
-
-    let pob = parameters.pob;
-    pob = await welcomeUtils.getGeoLocation(pob);
-    let location = parameters.location.city;
-    location = await welcomeUtils.getGeoLocation(location);
-
-    let userDetail = {
-      name: parameters.person.name,
-      gender: parameters.gender.toLowerCase(),
-      phone: phone,
-      dob: parameters.dob.date_time,
-      pob: {
-        place: pob.place_name,
-        coordinates: {
-          longitude: Number(pob.longitude),
-          latitude: Number(pob.latitude)
-        }
-      },
-      gothra: parameters.gothra,
-      currentLocation: {
-        place: location.place_name,
-        coordinates: {
-          longitude: Number(location.longitude),
-          latitude: Number(location.latitude)
-        }
-      },
-      lang: parameters.Language
-    };
-    let userdb = await welcomeController.createUsingphone(userDetail);
-    let data = await welcomeUtils.getAstroDetails(userdb);
-    let message = `As per your inputs your rasi: ${data.sign}, Nakshtra: ${data.Naksahtra}. You will receive daily astrology prediction from us.`;
-    twilio.sendSingleMessage(phone, message);
+    //Don't delete this
+    // let phone = this.agent.originalRequest.payload.data.From;
+    // phone = phone.replace("whatsapp:", "");
+    let { person, gender, date, time, pob, gothra, current_location } = this.agent.parameters;
+    let { name } = person;
+    let p_o_b = pob;
+    date = date.split("T")[0];
+    time = time.split("T")[1];
+    time = time.split("+")[0];
+    let detail = await welcomeController.saveDetails(
+      { name, gender, time, p_o_b, current_location, date, gothra },
+      "+9779843598848"
+    );
+    let { sign, Naksahtra } = await welcomeUtils.getAstroDetails(detail.pob, detail.dob);
     this.agent.add(
-      "Hi there I am A.I.Pundit powered by OnMyMobile. I will send daily astrology predictions, do custom puja as per astrology predictions and suggest a seva in nearby temple based on your birth chart"
+      `As per your inputs your rasi: ${sign}, Nakshtra: ${Naksahtra}. You will receive daily astrology prediction from us.`
     );
   }
 
@@ -73,10 +52,10 @@ class Welcome {
       { name, gender, time, p_o_b, current_location, date, gothra },
       "+977 9843598848"
     );
-      //API CALL HERE
-      //DONOT DELETE  this.agent.originalRequest.payload.data.From.replace("whatsapp:", "")
+    //API CALL HERE
+    //DONOT DELETE  this.agent.originalRequest.payload.data.From.replace("whatsapp:", "")
 
-    let { sign, Naksahtra } = await welcomeUtils.getAstroDetails( pob, dob);
+    let { sign, Naksahtra } = await welcomeUtils.getAstroDetails(pob, dob);
     this.agent.add(
       `As per your inputs your rasi: ${sign}, Nakshtra: ${Naksahtra}. You will receive daily astrology prediction from us.`
     );

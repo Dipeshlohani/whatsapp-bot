@@ -21,7 +21,7 @@ router.post("/", async (req, res, next) => {
     return welcome.sendResponse();
   });
 
-  intentMap.set("InfoIntent", () => {
+  intentMap.set("ProfileIntent", () => {
     return welcome.saveUser();
   });
 

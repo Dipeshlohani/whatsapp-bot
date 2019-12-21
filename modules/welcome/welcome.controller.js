@@ -2,7 +2,6 @@ const UserModel = require("../user/user.model");
 const Utils = require("./welcome.utils");
 
 class Controller {
-
   async getUser(payload) {
     let data = await UserModel.findOne({ phone: payload });
     if (data) return data;
@@ -49,10 +48,6 @@ class Controller {
     };
     let userdb = await this.createUsingphone(obj);
     return userdb;
-  }
-  async createUsingphone(payload) {
-    let data = await UserModel.create(payload);
-    return data;
   }
 }
 
