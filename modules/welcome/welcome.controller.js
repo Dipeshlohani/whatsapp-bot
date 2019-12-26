@@ -49,6 +49,10 @@ class Controller {
     let userdb = await this.createUsingphone(obj);
     return userdb;
   }
+  async createUsingphone(payload) {
+    let data = await UserModel.create(payload);
+    return data;
+  }
 }
 
 module.exports = new Controller();

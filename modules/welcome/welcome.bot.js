@@ -54,8 +54,10 @@ class Welcome {
     );
     //API CALL HERE
     //DONOT DELETE  this.agent.originalRequest.payload.data.From.replace("whatsapp:", "")
-
+    console.log("response");
     let { sign, Naksahtra } = await welcomeUtils.getAstroDetails(pob, dob);
+    console.log(sign);
+    console.log("here");
     this.agent.add(
       `As per your inputs your rasi: ${sign}, Nakshtra: ${Naksahtra}. You will receive daily astrology prediction from us.`
     );

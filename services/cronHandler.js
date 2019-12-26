@@ -31,27 +31,25 @@ const setUsersNakshatra = async () => {
 };
 
 const sendNakshatraNotification = async () => {
-  let users = await AstroModel.find({
-    prediction_date: { $gte: new Date(2019, 12, 19) }
-  }).populate("user", "phone name");
-  console.log(users);
-  //  {"created_on": {"$gte": new Date(2012, 7, 14), "$lt": new Date(2012, 7, 15)}}
-  // users.forEach(async elem => {
-  //   let { user, prediction, prediction_date } = elem;
-  //   let { phone, name } = user;
+  let users = await AstroModel.find({}).populate("user", "phone name");
+  // prediction_date: { $gte: new Date(2019, 12, 19) }
+  // console.log(users);
+  users.forEach(async elem => {
+    let { user, prediction, prediction_date } = elem;
+    let { phone, name } = user;
 
-  //   prediction_date = new Date(prediction_date).toLocaleString();
+    // prediction_date = new Date(prediction_date).toLocaleString();
 
-  //   if (prediction_date.getTime() === Date.now().getTime()) {
-  //     console.log("date match");
-  //   } else {
-  //     console.log("date doesnt match");
-  //   }
-  //   console.log(prediction_date);
-  //   // let message = `Hi ${name} here are your prediction for today. \n 1) Health: ${prediction.health} \n 2) Emotions:${prediction.emotions} \n 3) Profession: ${prediction.profession} \n  4) Luck: ${prediction.luck} \n  5) Personal Life: ${prediction.personal_life} \n 6) Travel: ${prediction.travel} `;
+    // if (prediction_date.getTime() === Date.now().getTime()) {
+    //   console.log("date match");
+    // } else {
+    //   console.log("date doesnt match");
+    // }
+    // console.log(prediction_date);
+    let message = `Hi ${name} here are your prediction for today. \n 1) Health: ${prediction.health} \n 2) Emotions:${prediction.emotions} \n 3) Profession: ${prediction.profession} \n  4) Luck: ${prediction.luck} \n  5) Personal Life: ${prediction.personal_life} \n 6) Travel: ${prediction.travel} `;
 
-  //   // await twilioNotify.sendSingleMessage(phone, message);
-  // });
+    await twilioNotify.sendSingleMessage(phone, message);
+  });
 };
 
 // setUsersNakshatra();
