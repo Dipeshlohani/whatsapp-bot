@@ -2,49 +2,43 @@ const UserModel = require("../user/user.model");
 const Utils = require("./welcome.utils");
 
 class Controller {
-  async getUser(payload) {
-    let data = await UserModel.findOne({ phone: payload });
+  async getUser(id) {
+    let data = await UserModel.findOne({ fbmsn_id: id });
     if (data) return data;
     return;
   }
 
-  async saveDetails(payload, phone) {
-    let dob;
-
-    let date = payload.date.split("T")[0].split("-");
-    let time = payload.time.split(":");
-    dob = {
-      year: date[0],
-      month: date[1],
-      day: date[2],
-      hour: time[0],
-      min: time[1]
-    };
-    let pob = await Utils.getGeoLocation(payload.p_o_b);
-    pob = {
-      place: payload.p_o_b,
-      coordinates: {
-        longitude: pob.longitude,
-        latitude: pob.latitude
+  async updateUser(id, payload) {
+    return await UserModel.findOneAndUpdate(
+      { _id: id },
+      {
+        birth_moon_sign: payload.sign,
+        birth_moon_nakshatra: payload.Naksahtra
       }
-    };
-    let currentLocation = await Utils.getGeoLocation(payload.current_location);
-    currentLocation = {
-      place: payload.current_location,
-      coordinates: {
-        longitude: currentLocation.longitude,
-        latitude: currentLocation.latitude
-      }
-    };
+    );
+  }
 
+  async saveDetails({
+    name,
+    gender,
+    dob,
+    pob,
+    currentLocation,
+    gothra,
+    fbmsn_id,
+    sign,
+    Naksahtra
+  }) {
     let obj = {
-      name: payload.name,
-      gender: payload.gender,
-      phone,
+      name,
+      gender,
       dob,
       pob,
-      gothra: payload.gothra,
-      currentLocation
+      currentLocation,
+      gothra,
+      fbmsn_id,
+      birth_moon_sign: sign,
+      birth_moon_nakshatra:Naksahtra,
     };
     let userdb = await this.createUsingphone(obj);
     return userdb;

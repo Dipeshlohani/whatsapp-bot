@@ -2,6 +2,15 @@ const mongoose = require("mongoose");
 
 const UserSchema = mongoose.Schema(
   {
+    fbmsn_id:{
+      type: String,
+    },
+    birth_moon_sign: {
+      type: String,
+    },
+    birth_moon_nakshatra: {
+      type: String,
+    },
     name: {
       type: String,
       required: true
@@ -12,7 +21,7 @@ const UserSchema = mongoose.Schema(
     },
     phone: {
       type: String,
-      required: true
+      // required: true
     },
     dob: {
       year: {

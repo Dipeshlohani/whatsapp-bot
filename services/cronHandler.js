@@ -8,7 +8,8 @@ mongoose.connect(config.get("db.url"), {
 const UserModal = require("../modules/user/user.model");
 const APIUtils = require("../modules/welcome/welcome.utils");
 const twilioNotify = require("./twilio");
-const AstroModel = require("../modules/astrology/astrology.model");
+const NakshatraModel = require("../modules/astrology/nakshatra.model");
+const sampleData = require("../stars.json");
 
 const setUsersNakshatra = async () => {
   let users = await UserModal.aggregate([
@@ -25,13 +26,38 @@ const setUsersNakshatra = async () => {
     let data = await APIUtils.getDailyNakshatraPrediction({ pob, dob });
 
     data.user = _id;
-    await AstroModel.create(data);
+    await NakshatraModel.create(data);
   }
-  process.exit();
+  return;
 };
 
+const saveAllStarNakshatras=async ()=> {
+  //to save 27 stars nakshatra
+  for(let i of sampleData) {
+    let data = await APIUtils.getDailyNakshatraPrediction(i);
+    await NakshatraModel.findOneAndUpdate(
+      { birth_moon_nakshatra: data.birth_moon_nakshatra },
+      data,
+      { upsert: true, new: true }
+    );
+  }
+  process.exit();
+}
+
+const sendNotificationToMessenger = async()=>{
+  let users = await UserModal.find({});
+  for(let user of users) {
+   let data=  await NakshatraModel.findOne({
+      birth_moon_nakshatra: user.birth_moon_nakshatra
+    });
+    console.log(user.fbmsn_id);
+  }
+};
+
+
+
 const sendNakshatraNotification = async () => {
-  let users = await AstroModel.find({}).populate("user", "phone name");
+  let users = await NakshatraModel.find({}).populate("user", "phone name");
   // prediction_date: { $gte: new Date(2019, 12, 19) }
   // console.log(users);
   users.forEach(async elem => {
@@ -53,5 +79,5 @@ const sendNakshatraNotification = async () => {
 };
 
 // setUsersNakshatra();
-sendNakshatraNotification();
-// process.exit();
+// sendNakshatraNotification();
+// saveAllStarNakshatras()
