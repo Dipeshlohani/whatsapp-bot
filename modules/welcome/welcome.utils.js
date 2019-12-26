@@ -46,18 +46,7 @@ exports.getAstroDetails = async ( pob, dob) => {
   return response.data;
 };
 
-exports.getDailyNakshatraPrediction = async ({ pob, dob }) => {
-  let { year, month, day, hour, min } = dob;
-  let data = {
-    day,
-    month,
-    year,
-    hour,
-    min,
-    lat: pob.coordinates.latitude,
-    lon: pob.coordinates.longitude,
-    tzone: 5.5
-  };
+exports.getDailyNakshatraPrediction = async ({ day, month,year,hour,min,lat,lon,tzone }) => {
   let response = await axios({
     method: "POST",
     url: "https://json.astrologyapi.com/v1/daily_nakshatra_prediction/next",
@@ -65,7 +54,7 @@ exports.getDailyNakshatraPrediction = async ({ pob, dob }) => {
       authorization: "Basic " + btoa(userId + ":" + apikey),
       "Content-Type": "application/json"
     },
-    data: JSON.stringify(data)
+    data: JSON.stringify({ day, month, year, hour, min, lat, lon, tzone })
   });
   return response.data;
 };
