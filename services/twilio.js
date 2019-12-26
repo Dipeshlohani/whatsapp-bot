@@ -10,7 +10,7 @@ class twilioNotify {
         from: "whatsapp:+14155238886",
         to: `whatsapp:${phone}`
       })
-      .then(message => console.log(message.sid))
+      .then(message => console.log(message.sid, phone))
       .catch(e => {
         console.log(e);
       });
@@ -19,3 +19,8 @@ class twilioNotify {
 }
 
 module.exports = new twilioNotify();
+
+// let phone = +9779843598848;
+// let message = "Hi";
+// const a = new twilioNotify();
+// a.sendSingleMessage(phone, message);

@@ -22,7 +22,7 @@ exports.getGeoLocation = async payload => {
   return response;
 };
 
-exports.getAstroDetails = async ({ pob, dob }) => {
+exports.getAstroDetails = async ( pob, dob) => {
   let { year, month, day, hour, min } = dob;
   let data = {
     year,
