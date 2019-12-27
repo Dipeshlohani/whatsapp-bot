@@ -15,8 +15,9 @@ class Welcome {
       this.agent.add(`hi ${data.name}. You've already registered. Thank you for being with us.`);
     } else {
       this.agent.add(
-        "Hi there I am A.I. Pundit powered by OnMyMobile. I will send daily predictions, do custom puja as per astrology predictions and suggest a seva in nearby temple based on your birth chart. Enter 1 for English, 2 for Telugu."
+        "Hi there I am A.I. Pundit powered by OnMyMobile. I will send daily predictions, do custom puja as per astrology predictions and suggest a seva in nearby temple based on your birth chart."
       );
+      this.agent.add(" Enter 1 for English, 2 for Telugu");
     }
   }
 
