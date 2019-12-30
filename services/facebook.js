@@ -5,6 +5,15 @@ class Facebook {
     this.token = access_token;
   }
   async sendMessage({ message, PSID }) {
+    // message = {
+    //   attachment: {
+    //     type: "audio",
+    //     payload: {
+    //       url: "https://cxb1.s3.amazonaws.com/aipundit/conclusion.wav",
+    //       is_reusable: true
+    //     }
+    //   }
+    // };
     message = {
       text: message
     };
