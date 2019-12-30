@@ -10,10 +10,6 @@ mongoose.connect(config.get("db.url"), {
 });
 // "ffmpeg -i F:/upwork/whatsapp-bot/assets/audios/s1.wav -i F:/upwork/whatsapp-bot/assets/audios/s2.wav -i F:/upwork/whatsapp-bot/assets/audios/prayer-part7.wav -i F:/upwork/whatsapp-bot/assets/audios/asservachanam-part1.wav -i F:/upwork/whatsapp-bot/assets/audios/asservachanam-part2.wav -i F:/upwork/whatsapp-bot/assets/audios/asservachanam-part3.wav -i F:/upwork/whatsapp-bot/assets/audios/conclusion.wav  -filter_complex [0:0][1:0][2:0][3:0][4:0][5:0][6:0]concat=n=7:v=0:a=1[out]  -map [out] F:/output.wav";
 
-let command1 = `ffmpeg -i F:/upwork/whatsapp-bot/assets/audios/intro.wav -i F:/upwork/whatsapp-bot/assets/audios/sankalpam-part2.wav -i \
-F:/upwork/whatsapp-bot/assets/audios/health_excellent.wav -i F:/upwork/whatsapp-bot/assets/audios/emotions_negative.wav -i F:/upwork/whatsapp-bot/assets/audios/profession_excellent.wav -i \
-F:/upwork/whatsapp-bot/assets/audios/luck_average.wav -i F:/upwork/whatsapp-bot/assets/audios/personal-life-average.wav -i F:/upwork/whatsapp-bot/assets/audios/travel-excellent.wav -i F:/upwork/whatsapp-bot/assets/audios/prayer-part7.wav -i F:/upwork/whatsapp-bot/assets/audios/asservachanam-part1.wav  -i F:/upwork/whatsapp-bot/assets/audios/asservachanam-part2.wav -i F:/upwork/whatsapp-bot/assets/audios/asservachanam-part3.wav -i F:/upwork/whatsapp-bot/assets/audios/conclusion.wav -filter_complex [0:0][1:0][2:0][3:0][4:0][5:0][6:0][7:0][8:0][9:0][10:0][11:0][12:0]concat=n=13:v=0:a=1[out]  -map [out] F:/output.wav`;
-
 const saveAudiofiles = async () => {
   let users = await UserModel.find({});
   // console.log(users);
@@ -115,10 +111,8 @@ const saveAudiofiles = async () => {
       }
       console.log(`stdout: ${stdout}`);
     });
-    return command1;
+    // return command1;
   }
 };
 
-saveAudiofiles()
-  .then(console.log)
-  .catch(console.error);
+saveAudiofiles();

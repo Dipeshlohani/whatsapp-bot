@@ -12,15 +12,15 @@ AWS.config.update({
   region: aws_s3.region
 });
 
-
 // var filePath = ;
-const save = () => {
+const save = async audioname => {
+  console.log(audioname);
   const s3 = new AWS.S3();
   // const uuid = newUUID.v4();
   const params = {
     Bucket: aws_s3.bucket,
-    Key: "aipundit/intro.wav",
-    Body: fs.createReadStream(__dirname + "/../assets/audios/intro.wav"),
+    Key: `aipundit/${audioname}`,
+    Body: fs.createReadStream(__dirname + `/../assets/audios/${audioname}`),
     ACL: "public-read-write",
     ContentType: "audio/wav"
   };
@@ -35,6 +35,7 @@ const save = () => {
       console.log("Uploaded in:", data.Location);
     }
   });
+  return;
 };
 
-save();
+module.exports = { save };
