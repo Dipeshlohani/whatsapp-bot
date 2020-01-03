@@ -4,19 +4,19 @@ class Facebook {
     this.base_url = base_url;
     this.token = access_token;
   }
-  async sendMessage({ message, PSID }) {
-    // message = {
-    //   attachment: {
-    //     type: "audio",
-    //     payload: {
-    //       url: "https://cxb1.s3.amazonaws.com/aipundit/conclusion.wav",
-    //       is_reusable: true
-    //     }
-    //   }
-    // };
-    message = {
-      text: message
-    };
+  async sendMessage(payload) {
+    let message;
+    if (payload.attachment) {
+      message = {
+        attachment: payload.attachment
+      };
+    }
+    if (payload.text) {
+      message = {
+        text: payload.text
+      };
+    }
+
     let response = await axios({
       method: "POST",
       url: `${this.base_url}/me/messages?access_token=${this.token}`,
@@ -25,7 +25,7 @@ class Facebook {
         messaging_type: "MESSAGE_TAG",
         tag: "CONFIRMED_EVENT_UPDATE",
         recipient: {
-          id: PSID
+          id: payload.id
         },
         message
       }
