@@ -124,7 +124,7 @@ const saveAudiofiles = async () => {
       birth_moon_nakshatra: user.birth_moon_nakshatra
     });
     let { sentiment } = data;
-    let command = `ffmpeg -i F:/upwork/whatsapp-bot/assets/audios/intro.wav -i F:/upwork/whatsapp-bot/assets/audios/sankalpam-part2.wav`;
+    let command = `ffmpeg -i F:/upwork/whatsapp-bot/assets/audios/intro.wav -i F:/upwork/whatsapp-bot/assets/users/${user._id}/Sankalpampart1.wav -i F:/upwork/whatsapp-bot/assets/audios/sankalpam-part2.wav`;
     switch (sentiment.health) {
       case "excellent":
         command += ` -i \t F:/upwork/whatsapp-bot/assets/audios/health_excellent.wav`;
@@ -218,12 +218,86 @@ const saveAudiofiles = async () => {
   // process.exit();
 };
 
+const userDetailTTS = async () => {
+  let voice = `en+m3`;
+  let users = await UserModel.find({});
+  for (let user of users) {
+    let { currentLocation, gothra, birth_moon_sign, birth_moon_nakshatra, name, _id } = user;
+    let { place } = currentLocation;
+    let obj = { place, gothra, birth_moon_sign, birth_moon_nakshatra, name };
+
+    fs.mkdir(
+      __dirname + `/../assets/users/${_id}`,
+      { recursive: true },
+      function() {
+        Object.keys(obj).forEach(el => {
+          let file = `${el}.wav`;
+          command = `espeak.exe -v ${voice} -s 120 -w ./assets/users/${_id}/${file} "${obj[el]}"`;
+          combine(command, function() {
+            return;
+          });
+        });
+      },
+      err => {
+        if (err) throw err;
+      }
+    );
+  }
+};
+
+const configTTS = async () => {
+  // const { exec } = require("child_process");
+  let voice = `en+m3`;
+  let filename = "/config/sankalpam.json";
+  let content = fs.readFileSync(process.cwd() + "/" + filename).toString();
+
+  Object.keys(JSON.parse(content)).forEach(el => {
+    let file = `${el}.wav`;
+    var command = `espeak.exe -v ${voice} -s 120 -w ./assets/default/${file} "${
+      JSON.parse(content)[el]
+    }"`;
+    combine(command, function() {
+      return;
+    });
+  });
+
+  // let voice = `en+m3`;
+
+  // let file = "sankalpampart1.wav";
+  // const { exec } = require("child_process");
+  // var command = `espeak.exe -v ${voice} -s 120 -w ${file} "${text}"`;
+
+  // exec(command, (err, stdout, stderr) => {
+  //   if (err) {
+  //     console.log("Error occurred: ", err);
+  //     return;
+  //   }
+  //   if (stdout) {
+  //     console.log("stdout occurred: ", err);
+  //     return;
+  //   }
+  //   if (stderr) {
+  //     console.log("stderr occurred: ", err);
+  //     return;
+  //   }
+  // });
+};
+const combineTTS = async () => {
+  let users = await UserModel.find({});
+  for (let user of users) {
+    let { _id } = user;
+    let command = `ffmpeg -i F:/upwork/whatsapp-bot/assets/audios/s1.wav -i F:/upwork/whatsapp-bot/assets/default/YEAR.wav -i F:/upwork/whatsapp-bot/assets/audios/s2.wav -i F:/upwork/whatsapp-bot/assets/default/MONTH.wav -i F:/upwork/whatsapp-bot/assets/audios/s3.wav -i F:/upwork/whatsapp-bot/assets/default/PAKSHA.wav -i F:/upwork/whatsapp-bot/assets/audios/s4.wav -i F:/upwork/whatsapp-bot/assets/default/THITHI.wav -i F:/upwork/whatsapp-bot/assets/audios/s5.wav -i F:/upwork/whatsapp-bot/assets/default/WEEK.wav -i F:/upwork/whatsapp-bot/assets/audios/s6.wav -i F:/upwork/whatsapp-bot/assets/users/${_id}/place.wav -i F:/upwork/whatsapp-bot/assets/audios/s7.wav -i F:/upwork/whatsapp-bot/assets/users/${_id}/gothra.wav -i F:/upwork/whatsapp-bot/assets/audios/s8.wav -i F:/upwork/whatsapp-bot/assets/users/${_id}/birth_moon_sign.wav -i F:/upwork/whatsapp-bot/assets/audios/s9.wav -i F:/upwork/whatsapp-bot/assets/users/${_id}/birth_moon_nakshatra.wav -i F:/upwork/whatsapp-bot/assets/audios/s10.wav -i F:/upwork/whatsapp-bot/assets/users/${_id}/name.wav -i F:/upwork/whatsapp-bot/assets/audios/s11.wav -filter_complex [0:0][1:0][2:0][3:0][4:0][5:0][6:0][7:0][8:0][9:0][10:0][11:0][12:0][13:0][14:0][15:0][16:0][17:0][18:0][19:0][20:0]concat=n=21:v=0:a=1[out]  -map [out] F:/upwork/whatsapp-bot/assets/users/${_id}/Sankalpampart1.wav`;
+    combine(command, function() {
+      return;
+    });
+  }
+};
 function combine(command, cb) {
   exec(command, (error, stdout, stderr) => {
     if (error) {
+      console.log(error);
       cb(stderr);
     } else {
-      console.log("here");
       cb(stdout);
     }
   });
@@ -297,5 +371,7 @@ const sendNakshatraNotification = async () => {
 // setUsersNakshatra();
 // sendNakshatraNotification();
 // saveAllStarNakshatras();
-sendNotificationToMessenger();
+// sendNotificationToMessenger();
 // saveAudiofiles();
+// combineTTS();
+userDetailTTS();
