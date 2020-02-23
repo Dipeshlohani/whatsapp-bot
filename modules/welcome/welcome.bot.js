@@ -12,7 +12,7 @@ class Welcome {
 
     let data = await welcomeController.getUser(this.agent.originalRequest.payload.data.sender.id);
     if (data) {
-      this.agent.add(`hi ${data.name}. You've already registered. Thank you for being with us.`);
+      this.agent.add(`Hi ${data.name}. You've already registered.Please enter 1 to do it again.`);
     } else {
       this.agent.add(
         "Hi there I am A.I. Pundit powered by OnMyMobile. I will send daily predictions, do custom puja as per astrology predictions and suggest a seva in nearby temple based on your birth chart."

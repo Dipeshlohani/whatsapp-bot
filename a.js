@@ -19,6 +19,7 @@ const AWS = require("./aws_s3");
 const fs = require("fs");
 
 const setUsersNakshatra = async () => {
+  try {
     let users = await UserModal.aggregate([
       {
         $project: {
@@ -28,7 +29,6 @@ const setUsersNakshatra = async () => {
         }
       }
     ]);
-    if(!users.length) throw Error("Users Not Found");
     for (let user of users) {
       let { _id, pob, dob } = user;
       let data = await APIUtils.getDailyNakshatraPrediction({ pob, dob });
@@ -36,26 +36,28 @@ const setUsersNakshatra = async () => {
       data.user = _id;
       await NakshatraModel.create(data);
     }
-    return true;
- };
-
-const getAllNakshatras = () => {
-  return nakshatraAPI();
+    return 200;
+  } catch (e) {
+    return e;
+  }
 };
 
-const nakshatraAPI = async () => {	
-    if(!sampleData.length) throw Error("Sample data not found!");
+const saveAllStarNakshatras = async () => {
+  //to save 27 stars nakshatra
+  try {
     for (let i of sampleData) {
       let data = await APIUtils.getDailyNakshatraPrediction(i);
       await NakshatraModel.findOneAndUpdate(
         { birth_moon_nakshatra: data.birth_moon_nakshatra },
         data,
         { upsert: true, new: true }
-      )
+      );
     }
-   return true;
+    return 200;
+  } catch (e) {
+    return e;
   }
-
+};
 
 const saveAudiofiles = async () => {
   try {
@@ -65,6 +67,7 @@ const saveAudiofiles = async () => {
         birth_moon_nakshatra: user.birth_moon_nakshatra
       });
       let { sentiment } = data;
+      console.log(sentiment);
       let command = `ffmpeg -i /root/projects/whatsapp-bot/assets/audios/intro.wav -i /root/projects/whatsapp-bot/assets/users/${user._id}/Sankalpampart1.wav -i /root/projects/whatsapp-bot/assets/audios/sankalpam-part2.wav`;
       switch (sentiment.health) {
         case "excellent":
@@ -98,7 +101,6 @@ const saveAudiofiles = async () => {
           break;
         case "average":
           command += ` -i /root/projects/whatsapp-bot/assets/audios/profession_average.wav`;
-          	;
         case "negative":
           command += ` -i /root/projects/whatsapp-bot/assets/audios/profession_negative.wav`;
           break;
@@ -163,9 +165,9 @@ const saveAudiofiles = async () => {
 };
 
 const userDetailTTS = async () => {
+  try {
     let voice = `en+m3`;
     let users = await UserModel.find({});
-if(!users.length) throw Error("Users Not Found");
     for (let user of users) {
       let {
         currentLocation,
@@ -195,11 +197,16 @@ if(!users.length) throw Error("Users Not Found");
         }
       );
     }
-    return true;
- };
+    return 200;
+  } catch (e) {
+    return e;
+  }
+};
 
 const configTTS = async () => {
+  try {
     let voice = `en+m3`;
+
     let filename = "/root/projects/whatsapp-bot/config/sankalpam.json";
     let content = fs.readFileSync(filename).toString();
     Object.keys(JSON.parse(content)).forEach(el => {
@@ -211,23 +218,27 @@ const configTTS = async () => {
         return;
       });
     });
-    return true;
+
+    return 200;
+  } catch (e) {
+    return e;
+  }
 };
 
-const combineTTS = async () => {  
-console.log("!here");
+const combineTTS = async () => {
+  try {
     let users = await UserModel.find({});
-    if(!users.length) throw Error("Users Not Found");
     for (let user of users) {
-console.log(user,"===");
       let { _id } = user;
       let command = `ffmpeg -i /root/projects/whatsapp-bot/assets/audios/s1.wav -i /root/projects/whatsapp-bot/assets/default/YEAR.wav -i /root/projects/whatsapp-bot/assets/audios/s2.wav -i /root/projects/whatsapp-bot/assets/default/MONTH.wav -i /root/projects/whatsapp-bot/assets/audios/s3.wav -i /root/projects/whatsapp-bot/assets/default/PAKSHA.wav -i /root/projects/whatsapp-bot/assets/audios/s4.wav -i /root/projects/whatsapp-bot/assets/default/THITHI.wav -i /root/projects/whatsapp-bot/assets/audios/s5.wav -i /root/projects/whatsapp-bot/assets/default/WEEK.wav -i /root/projects/whatsapp-bot/assets/audios/s6.wav -i /root/projects/whatsapp-bot/assets/users/${_id}/place.wav -i /root/projects/whatsapp-bot/assets/audios/s7.wav -i /root/projects/whatsapp-bot/assets/users/${_id}/gothra.wav -i /root/projects/whatsapp-bot/assets/audios/s8.wav -i /root/projects/whatsapp-bot/assets/users/${_id}/birth_moon_sign.wav -i /root/projects/whatsapp-bot/assets/audios/s9.wav -i /root/projects/whatsapp-bot/assets/users/${_id}/birth_moon_nakshatra.wav -i /root/projects/whatsapp-bot/assets/audios/s10.wav -i /root/projects/whatsapp-bot/assets/users/${_id}/name.wav -i /root/projects/whatsapp-bot/assets/audios/s11.wav -filter_complex [0:0][1:0][2:0][3:0][4:0][5:0][6:0][7:0][8:0][9:0][10:0][11:0][12:0][13:0][14:0][15:0][16:0][17:0][18:0][19:0][20:0]concat=n=21:v=0:a=1[out]  -map [out] /root/projects/whatsapp-bot/assets/users/${_id}/Sankalpampart1.wav`;
       combine(command, function() {
         return;
       });
     }
-	console.log("!Done");
-    return true;
+    return 200;
+  } catch (e) {
+    return e;
+  }
 };
 
 function combine(command, cb) {
@@ -242,13 +253,14 @@ function combine(command, cb) {
 }
 
 const sendNotificationToMessenger = async () => {
+  try {
     let users = await UserModel.find({});
-    if(!users.length) throw Error("Users Not Found");
     for (let user of users) {
       let data = await NakshatraModel.findOne({
         birth_moon_nakshatra: user.birth_moon_nakshatra
       });
-           if (
+      // console.log(new Date().toLocaleDateString());
+      if (
         new Date(data.prediction_date).toLocaleDateString() ==
         new Date().toLocaleDateString()
       ) {
@@ -284,13 +296,15 @@ const sendNotificationToMessenger = async () => {
         await FB.sendMessage(payload);
       }
     }
-    return true;
+    return 200;
+  } catch (e) {
+    return e;
+  }
 };
 
-
 const sendNakshatraNotification = async () => {
+  try {
     let users = await NakshatraModel.find({}).populate("user", "phone name");
-    if(!users.length) throw Error("Users Not Found");
     users.forEach(async elem => {
       let { user, prediction, prediction_date } = elem;
       let { phone, name } = user;
@@ -299,7 +313,16 @@ const sendNakshatraNotification = async () => {
 
       await twilioNotify.sendSingleMessage(phone, message);
     });
-    return true;
+    return 200;
+  } catch (e) {
+    return e;
+  }
 };
 
-module.exports = { getAllNakshatras, userDetailTTS, configTTS,  combineTTS, saveAudiofiles, sendNotificationToMessenger};
+exports.saveNakshatras = saveAllStarNakshatras();
+exports.userDetailTTS = userDetailTTS();
+exports.configTTS = configTTS();
+exports.combineTTS = combineTTS();
+exports.saveAudiofiles = saveAudiofiles();
+exports.sendNotificationToMessenger = sendNotificationToMessenger();
+

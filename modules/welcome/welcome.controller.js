@@ -44,8 +44,9 @@ class Controller {
     return userdb;
   }
   async createUsingphone(payload) {
-    let data = await UserModel.create(payload);
-    return data;
+    //let data = await UserModel.create(payload);
+      let data = await UserModel.findOneAndUpdate({ fbmsn_id : payload.fbmsn_id },payload,{ new : true , upsert: true});   
+      return data;
   }
 }
 

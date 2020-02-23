@@ -20,7 +20,7 @@ const save = async audioname => {
   const params = {
     Bucket: aws_s3.bucket,
     Key: `aipundit/${audioname}`,
-    Body: fs.createReadStream(__dirname + `/../assets/audios/${audioname}`),
+    Body: fs.createReadStream(`/root/projects/whatsapp-bot/assets/audios/${audioname}`),
     ACL: "public-read-write",
     ContentType: "audio/wav"
   };

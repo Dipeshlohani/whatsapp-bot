@@ -1,10 +1,11 @@
 {
   "name": "whatsapp-bot",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development nodemon ./bin/www",
+    "start": "node ./bin/www",
     "production": "NODE_ENV=production node ./bin/www",
+    "dipesh" : "node app.js",
     "client": "cross-env NODE_ENV=development cd ./client && yarn start",
     "all": "cross-env NODE_ENV=development npm-run-all -p start client",
     "build": "cross-env NODE_ENV=production yarn install && cd ./client && yarn install && yarn run build"
@@ -22,7 +23,7 @@
     "config": "^3.2.4",
     "cookie-parser": "^1.4.4",
     "cross-env": "^6.0.3",
-    "dialogflow-fulfillment": "0.6.1",
+    "dialogflow-fulfillment": "^0.6.1",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "ffmpeg": "^0.0.4",
