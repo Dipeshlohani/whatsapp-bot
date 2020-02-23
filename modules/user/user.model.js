@@ -26,58 +26,58 @@ const UserSchema = mongoose.Schema(
     dob: {
       year: {
         type: String,
-        required: true
+        // required: true
       },
       month: {
         type: String,
-        required: true
+        // required: true
       },
       day: {
         type: String,
-        required: true
+        // required: true
       },
       hour: {
         type: String,
-        required: true
+        // required: true
       },
       min: {
         type: String,
-        required: true
+        // required: true
       }
     },
     pob: {
       place: {
         type: String,
-        required: true
+        // required: true
       },
       coordinates: {
         longitude: {
           type: Number,
-          required: true
+          // required: true
         },
         latitude: {
           type: Number,
-          required: true
+          // required: true
         }
       }
     },
     gothra: {
       type: String,
-      required: true
+      // required: true
     },
     currentLocation: {
       place: {
         type: String,
-        required: true
+        // required: true
       },
       coordinates: {
         longitude: {
           type: Number,
-          required: true
+          // required: true
         },
         latitude: {
           type: Number,
-          required: true
+          // required: true
         }
       }
     },

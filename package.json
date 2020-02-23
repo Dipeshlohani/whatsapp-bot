@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "nodemon ./bin/www",
     "production": "NODE_ENV=production node ./bin/www",
     "dipesh" : "node app.js",
     "client": "cross-env NODE_ENV=development cd ./client && yarn start",
