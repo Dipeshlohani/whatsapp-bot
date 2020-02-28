@@ -8,15 +8,12 @@ router.get("/config", (req, res, next) => {
   res.render("config");
 });
 
-router.get("/userlist", (req, res, next) => {
-  res.render("userlist");
-});
 router.get("/user/add", (req, res, next) => {
-  res.render("userAdd ");
+  res.render("manualAdd");
 });
 
-router.get("/nakshatralist", (req, res, next) => {
-  res.render("nakshatralist");
+router.get("/nakshatra", (req, res, next) => {
+  res.render("nakshatra");
 });
 
 router.get("/nakshatralist/:id", (req, res, next) => {
