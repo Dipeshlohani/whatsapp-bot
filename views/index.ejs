@@ -7,34 +7,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+    <link rel="icon" type="image/png" href="/images/icons/favicon.ico" />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="/fonts/iconic/css/material-design-iconic-font.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="/vendor/animsition/css/animsition.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="/vendor/daterangepicker/daterangepicker.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/noui/nouislider.min.css">
+    <link rel="stylesheet" type="text/css" href="/vendor/noui/nouislider.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="css/util.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
     <!--===============================================================================================-->
+
 </head>
 
 <body>
-
-
     <div class="container-contact100">
         <div class="wrap-contact100">
             <form class="contact100-form validate-form">
@@ -78,7 +77,7 @@
                     <input class="input100" type="text" name="gothra" placeholder="Enter your place of birth">
                 </div>
                 <div class="wrap-input100 bg1">
-                    <span class="label-input100">Date of birth *</span><br/>
+                    <span class="label-input100">Date of birth ( DD / MM / YYYY   HH : MM ) *</span><br/>
                     <input type="text" class="input100" id="datetime12" data-format="DD-MM-YYYY h:mm a" name="dob"
                         data-template="DD / MM / YYYY     hh : mm a" name="datetime" value="21-12-2012 8:30 pm">
                 </div>
@@ -98,49 +97,64 @@
 
 
     <!--===============================================================================================-->
-    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
     <!--===============================================================================================-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!-- <script src="js/jquery.js"></script> -->
-    <script src="js/moment.min.js"></script>
-    <script src="js/combodate.js"></script>
+    <script src="/js/moment.min.js"></script>
+    <script src="/js/combodate.js"></script>
     <!--===============================================================================================-->
-    <script src="vendor/animsition/js/animsition.min.js"></script>
+    <script src="/vendor/animsition/js/animsition.min.js"></script>
     <!--===============================================================================================-->
-    <script src="vendor/bootstrap/js/popper.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="js/index.js"></script>
+    <script src="/vendor/bootstrap/js/popper.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/index.js"></script>
     <!--===============================================================================================-->
-    <script src="vendor/select2/select2.min.js"></script>
+    <script src="/vendor/select2/select2.min.js"></script>
     <script>
+        function dobParser(dob) {
+            return {
+                year: dob.split(" ")[0].split("-")[2],
+                month: dob.split(" ")[0].split("-")[1],
+                day: dob.split(" ")[0].split("-")[0],
+                hour: dob.split(" ")[1].split(":")[0],
+                min: dob.split(" ")[1].split(":")[1]
+            }
+        }
+
 
         $(".contact100-form").on("submit",(e)=>{
-            alert("!connected");
             e.preventDefault();
+            // let shift = dob.split(" ")[2]; //to do am or pm string conversion
             let data = {
                 name: $("input[name=name]").val(),
                 gender: $("select[name=gender]").val(),
-                pob: $("input[name=pob]").val(),
+                pob: {
+                    place : $("input[name=pob]").val()
+                },
                 currentLocation: $("input[name=currentLocation]").val(),
                 phone: $("input[name=phone]").val(),
                 gothra: $("input[name=gothra]").val(),
-                dob: $("input[name=dob]").val(),
+                dob : dobParser($("input[name=dob]").val())
             }
-
             $.ajax({
                 url: "/api/v1/user",
                 type: "POST",
-                data: data
+                data
             })
             .then(d=>{
-                console.log("UPDTED")
-            })
-            .catch(e=> {
-
+                    swal({
+                        title: "Profile saved!",
+                        text: "You've successfully registered!",
+                        icon: "success",
+                        button: "Done",
+                    });
+               $(".contact100-form")[0].reset();
             });
             });
         $('#datetime12').combodate({
             minYear: 1975,
-            maxYear: 2020,
+            maxYear: (new Date).getFullYear(),
             minuteStep: 1
         });
         $(".js-select2").each(function () {
@@ -148,39 +162,16 @@
                 minimumResultsForSearch: 20,
                 dropdownParent: $(this).next('.dropDownSelect2')
             });
-
-
-            $(".js-select2").each(function () {
-                $(this).on('select2:close', function (e) {
-                    if ($(this).val() == "Please") {
-                        $('.js-show-service').slideUp();
-                    }
-                    else {
-                        $('.js-show-service').slideUp();
-                        $('.js-show-service').slideDown();
-                    }
-                });
-            });
-        })
+        });
     </script>
     <!--===============================================================================================-->
-    <script src="vendor/daterangepicker/moment.min.js"></script>
-    <script src="vendor/daterangepicker/daterangepicker.js"></script>
+    <script src="/vendor/daterangepicker/moment.min.js"></script>
+    <script src="/vendor/daterangepicker/daterangepicker.js"></script>
     <!--===============================================================================================-->
-    <script src="vendor/countdowntime/countdowntime.js"></script>
+    <script src="/vendor/countdowntime/countdowntime.js"></script>
     <!--===============================================================================================-->
     <!--===============================================================================================-->
-    <script src="js/main.js"></script>
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-23581568-13');
-    </script>
+    <script src="/js/main.js"></script>
 
 </body>
 
