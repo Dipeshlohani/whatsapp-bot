@@ -1,163 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <title>Contact V5</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <title>Sankalpam Config</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css" />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="fonts/iconic/css/material-design-iconic-font.min.css"
+    />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css" />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="css/util.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/noui/nouislider.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="css/util.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <!--===============================================================================================-->
-</head>
+  </head>
 
-<body>
-
-
+  <body>
     <div class="container-contact100">
-        <div class="wrap-contact100">
-            <form class="contact100-form validate-form">
-                <span class="contact100-form-title">
-                    Update Config
-                </span>
+      <div class="wrap-contact100">
+        <form class="frmConfig validate-form">
+          <span class="contact100-form-title">
+            Update Config
+          </span>
 
-                <div class="wrap-input100 validate-input bg1" data-validate="Please Type Year">
-                    <span class="label-input100">YEAR*</span>
-                    <input class="input100" type="text" name="year" placeholder="Enter Year">
-                </div>
-                <div class="wrap-input100 validate-input bg1" data-validate="Please Type Month">
-                    <span class="label-input100">MONTH*</span>
-                    <input class="input100" type="text" name="month" placeholder="Enter Month">
-                </div>
-                <div class="wrap-input100 validate-input bg1" data-validate="Please Type Paksha">
-                    <span class="label-input100">PAKSHA*</span>
-                    <input class="input100" type="text" name="paksha" placeholder="Enter Paksha">
-                </div>
-                <div class="wrap-input100 validate-input bg1" data-validate="Please Type Thithi">
-                    <span class="label-input100">THITHI*</span>
-                    <input class="input100" type="text" name="thithi" placeholder="Enter Thithi">
-                </div>
-                <div class="wrap-input100 validate-input bg1" data-validate="Please Type Week">
-                    <span class="label-input100">WEEK*</span>
-                    <input class="input100" type="text" name="week" placeholder="Enter Week">
-                </div>
-               
-                <div class="container-contact100-form-btn">
-                    <button class="contact100-form-btn">
-                        <span>
-                            Submit
-                            <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
-                        </span>
-                    </button>
-                </div>
-            </form>
-        </div>
+          <div class="wrap-input100 validate-input bg1" data-validate="Please Type Year">
+            <span class="label-input100">YEAR*</span>
+            <input class="input100" type="text" name="year" placeholder="Enter Year" />
+          </div>
+          <div class="wrap-input100 validate-input bg1" data-validate="Please Type Month">
+            <span class="label-input100">MONTH*</span>
+            <input class="input100" type="text" name="month" placeholder="Enter Month" />
+          </div>
+          <div class="wrap-input100 validate-input bg1" data-validate="Please Type Paksha">
+            <span class="label-input100">PAKSHA*</span>
+            <input class="input100" type="text" name="paksha" placeholder="Enter Paksha" />
+          </div>
+          <div class="wrap-input100 validate-input bg1" data-validate="Please Type Thithi">
+            <span class="label-input100">THITHI*</span>
+            <input class="input100" type="text" name="thithi" placeholder="Enter Thithi" />
+          </div>
+          <div class="wrap-input100 validate-input bg1" data-validate="Please Type Week">
+            <span class="label-input100">WEEK*</span>
+            <input class="input100" type="text" name="week" placeholder="Enter Week" />
+          </div>
+
+          <div class="container-contact100-form-btn">
+            <button class="contact100-form-btn">
+              <span>
+                Submit
+                <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-
-
 
     <!--===============================================================================================-->
     <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
     <!--===============================================================================================-->
-    <!-- <script src="js/jquery.js"></script> -->
-    <script src="js/moment.min.js"></script>
-    <script src="js/combodate.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <!--===============================================================================================-->
-    <script src="vendor/animsition/js/animsition.min.js"></script>
-    <!--===============================================================================================-->
-    <script src="vendor/bootstrap/js/popper.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
     <!--===============================================================================================-->
-    <script src="vendor/select2/select2.min.js"></script>
     <script>
-        $('#datetime12').combodate({
-            minYear: 1975,
-            maxYear: 2013,
-            minuteStep: 10
-        });
-        $(".js-select2").each(function () {
-            $(this).select2({
-                minimumResultsForSearch: 20,
-                dropdownParent: $(this).next('.dropDownSelect2')
+      $(".frmConfig").on("submit", e => {
+        e.preventDefault();
+        let data = {
+          YEAR: $('input[name="year"]').val(),
+          MONTH: $('input[name="month"]').val(),
+          PAKSHA: $('input[name="paksha"]').val(),
+          THITHI: $('input[name="thithi"]').val(),
+          WEEK: $('input[name="week"]').val()
+        };
+        if ((data.YEAR && data.MONTH && data.PAKSHA) || data.WEEK) {
+          $.ajax({
+            url: "/api/v1/user/config/update",
+            method: "POST",
+            data
+          })
+            .then(d => {
+              swal({
+                title: "Config saved!",
+                text: "Sankalpam config successfully updated!",
+                icon: "success",
+                button: "Done"
+              }).then(d => {
+                $("form")[0].reset();
+              });
+            })
+            .catch(e => {
+              console.log(e);
             });
-
-
-            $(".js-select2").each(function () {
-                $(this).on('select2:close', function (e) {
-                    if ($(this).val() == "Please chooses") {
-                        $('.js-show-service').slideUp();
-                    }
-                    else {
-                        $('.js-show-service').slideUp();
-                        $('.js-show-service').slideDown();
-                    }
-                });
-            });
-        })
+        } else {
+          swal("Incomplete Config");
+        }
+      });
     </script>
-    <!--===============================================================================================-->
-    <script src="vendor/daterangepicker/moment.min.js"></script>
-    <script src="vendor/daterangepicker/daterangepicker.js"></script>
-    <!--===============================================================================================-->
-    <script src="vendor/countdowntime/countdowntime.js"></script>
-    <!--===============================================================================================-->
-    <script src="vendor/noui/nouislider.min.js"></script>
-    <script>
-        var filterBar = document.getElementById('filter-bar');
-
-        noUiSlider.create(filterBar, {
-            start: [1500, 3900],
-            connect: true,
-            range: {
-                'min': 1500,
-                'max': 7500
-            }
-        });
-
-        var skipValues = [
-            document.getElementById('value-lower'),
-            document.getElementById('value-upper')
-        ];
-
-        filterBar.noUiSlider.on('update', function (values, handle) {
-            skipValues[handle].innerHTML = Math.round(values[handle]);
-            $('.contact100-form-range-value input[name="from-value"]').val($('#value-lower').html());
-            $('.contact100-form-range-value input[name="to-value"]').val($('#value-upper').html());
-        });
-    </script>
-    <!--===============================================================================================-->
-    <script src="js/main.js"></script>
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-23581568-13');
-    </script>
-
-</body>
-
+  </body>
 </html>
