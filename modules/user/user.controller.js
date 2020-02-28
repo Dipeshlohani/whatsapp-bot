@@ -5,15 +5,6 @@ class Controller {
     return User.create(payload);
   }
 
-  async updateConfig(payload) {
-    const fs = require("fs");
-    fs.writeFileSync(
-      __dirname + "/../../config/sankalpam.json",
-      JSON.stringify(payload, 2, null)
-    );
-    return payload;
-  }
-
   async list({ limit, start, page }) {
     let total = await User.countDocuments();
     let data = await User.find()
@@ -27,6 +18,11 @@ class Controller {
       page,
       data
     };
+  }
+  async updateConfig(payload) {
+    const fs = require("fs");
+    fs.writeFileSync(__dirname + "/../../config/sankalpam.json", JSON.stringify(payload, 2, null));
+    return payload;
   }
 }
 
