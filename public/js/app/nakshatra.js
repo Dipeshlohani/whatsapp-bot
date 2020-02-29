@@ -10,33 +10,22 @@ class Nakshatra {
       $("textarea[name=emotion_prediction]").val(data.prediction.emotions);
       $("textarea[name=profession_prediction]").val(data.prediction.profession);
       $("textarea[name=luck_prediction]").val(data.prediction.luck);
-      $("textarea[name=personallife_prediction]").val(data.prediction.personal_life);
+      $("textarea[name=personallife_prediction]").val(
+        data.prediction.personal_life
+      );
       $("textarea[name=travel_prediction]").val(data.prediction.travel);
       if (data.sentiment) {
-        $(`select[name=health_sentiment] option[value=${data.sentiment.health}]`).prop(
-          "selected",
-          true
+        $('select[name="health_sentiment"]').val(data.sentiment.health);
+        $('select[name="emotion_sentiment"]').val(data.sentiment.emotions);
+        $('select[name="profession_sentiment"]').val(data.sentiment.profession);
+        $('select[name="luck_sentiment"]').val(data.sentiment.luck);
+        $('select[name="personallife_sentiment"]').val(
+          data.sentiment.personal_life
         );
-        $(`select[name=emotion_sentiment] option[value=${data.sentiment.emotions}]`).prop(
-          "selected",
-          true
-        );
-        $(`select[name=profession_sentiment] option[value=${data.sentiment.profession}]`).prop(
-          "selected",
-          true
-        );
-        $(`select[name=luck_sentiment] option[value=${data.sentiment.luck}]`).prop(
-          "selected",
-          true
-        );
-        $(`select[name=personallife_sentiment] option[value=${data.sentiment.personal_life}]`).prop(
-          "selected",
-          true
-        );
-        $(`select[name=travel_sentiment] option[value=${data.sentiment.travel}]`).prop(
-          "selected",
-          true
-        );
+        $('select[name="travel_sentiment"]').val(data.sentiment.travel);
+        $(".js-select2")
+          .select2()
+          .trigger("change");
       }
     });
   }
