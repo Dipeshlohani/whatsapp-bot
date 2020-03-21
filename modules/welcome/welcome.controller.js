@@ -1,5 +1,6 @@
 const UserModel = require("../user/user.model");
 const Utils = require("./welcome.utils");
+const { userDetailTTS, combineTTS } = require("../../services/cronHandler");
 
 class Controller {
   async getUser(id) {
@@ -38,15 +39,20 @@ class Controller {
       gothra,
       fbmsn_id,
       birth_moon_sign: sign,
-      birth_moon_nakshatra:Naksahtra,
+      birth_moon_nakshatra: Naksahtra
     };
     let userdb = await this.createUsingphone(obj);
     return userdb;
   }
   async createUsingphone(payload) {
     //let data = await UserModel.create(payload);
-      let data = await UserModel.findOneAndUpdate({ fbmsn_id : payload.fbmsn_id },payload,{ new : true , upsert: true});   
-      return data;
+    let data = await UserModel.findOneAndUpdate({ fbmsn_id: payload.fbmsn_id }, payload, {
+      new: true,
+      upsert: true
+    });
+    await userDetailTTS(data);
+    await combineTTS(data);
+    return data;
   }
 }
 

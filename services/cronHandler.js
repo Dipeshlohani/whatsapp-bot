@@ -59,6 +59,7 @@ const nakshatraAPI = async () => {
 
 const saveAudiofiles = async () => {
   try {
+    console.log("================================DIRNAME==========================="+__dirname);
     let users = await UserModel.find({});
     for (let user of users) {
       let data = await NakshatraModel.findOne({
@@ -146,11 +147,11 @@ const saveAudiofiles = async () => {
       }
       command += ` -i /root/projects/whatsapp-bot/assets/audios/prayer-part7.wav -i /root/projects/whatsapp-bot/assets/audios/asservachanam-part1.wav  -i /root/projects/whatsapp-bot/assets/audios/asservachanam-part2.wav -i /root/projects/whatsapp-bot/assets/audios/asservachanam-part3.wav -i /root/projects/whatsapp-bot/assets/audios/conclusion.wav -filter_complex [0:0][1:0][2:0][3:0][4:0][5:0][6:0][7:0][8:0][9:0][10:0][11:0][12:0][13:0]concat=n=14:v=0:a=1[out]  -map [out] /root/projects/whatsapp-bot/assets/audios/prayer_${
         user.fbmsn_id
-      }_${new Date(data.prediction_date).toLocaleDateString()}.wav`;
+      }_${new Date(data.prediction_date).getTime()}.wav`;
 
       let audioname = `prayer_${user.fbmsn_id}_${new Date(
         data.prediction_date
-      ).toLocaleDateString()}.wav`;
+      ).getTime()}.wav`;
       combine(command, function() {
         AWS.save(audioname);
       });
@@ -158,48 +159,45 @@ const saveAudiofiles = async () => {
 
     return 200;
   } catch (e) {
+	console.log(e);
     return e;
   }
 };
 
-const userDetailTTS = async () => {
+const userDetailTTS = async data => {
+  try {
     let voice = `en+m3`;
-    let users = await UserModel.find({});
-if(!users.length) throw Error("Users Not Found");
-    for (let user of users) {
-      let {
-        currentLocation,
-        gothra,
-        birth_moon_sign,
-        birth_moon_nakshatra,
-        name,
-        _id
-      } = user;
-      let { place } = currentLocation;
-      let obj = { place, gothra, birth_moon_sign, birth_moon_nakshatra, name };
+    let { currentLocation, gothra, birth_moon_sign, birth_moon_nakshatra, name, _id } = data;
+    let { place } = currentLocation;
+    let obj = { place, gothra, birth_moon_sign, birth_moon_nakshatra, name };
 
-      fs.mkdir(
-        `/root/projects/whatsapp-bot/assets/users/${_id}`,
-        { recursive: true },
-        function() {
-          Object.keys(obj).forEach(el => {
-            let file = `${el}.wav`;
-            command = `espeak -v ${voice} -s 120 -w /root/projects/whatsapp-bot/assets/users/${_id}/${file} "${obj[el]}"`;
-            combine(command, function() {
-              return;
-            });
+    fs.mkdir(
+      `/root/projects/whatsapp-bot/assets/users/${_id}`,
+      { recursive: true },
+      function() {
+        Object.keys(obj).forEach(el => {
+          let file = `${el}.wav`;
+          command = `espeak -v ${voice} -s 120 -w /root/projects/whatsapp-bot/assets/users/${_id}/${file} "${obj[el]}"`;
+          combine(command, function() {
+            return;
           });
-        },
-        err => {
-          if (err) throw err;
-        }
-      );
-    }
+        });
+      },
+      err => {
+        if (err) throw err;
+      }
+    );
+
     return true;
- };
+  } catch (e) {
+    console.log(e);
+    return e;
+  }
+};
 
 const configTTS = async () => {
-    let voice = `en+m3`;
+try {
+ let voice = `en+m3`;
     let filename = "/root/projects/whatsapp-bot/config/sankalpam.json";
     let content = fs.readFileSync(filename).toString();
     Object.keys(JSON.parse(content)).forEach(el => {
@@ -212,28 +210,33 @@ const configTTS = async () => {
       });
     });
     return true;
+} catch(e) {
+console.log(e);	
+return e;
+}
+   
 };
 
-const combineTTS = async () => {  
-console.log("!here");
-    let users = await UserModel.find({});
-    if(!users.length) throw Error("Users Not Found");
-    for (let user of users) {
-console.log(user,"===");
-      let { _id } = user;
+const combineTTS = async (data) => {
+  try {
+      let { _id } = data;
       let command = `ffmpeg -i /root/projects/whatsapp-bot/assets/audios/s1.wav -i /root/projects/whatsapp-bot/assets/default/YEAR.wav -i /root/projects/whatsapp-bot/assets/audios/s2.wav -i /root/projects/whatsapp-bot/assets/default/MONTH.wav -i /root/projects/whatsapp-bot/assets/audios/s3.wav -i /root/projects/whatsapp-bot/assets/default/PAKSHA.wav -i /root/projects/whatsapp-bot/assets/audios/s4.wav -i /root/projects/whatsapp-bot/assets/default/THITHI.wav -i /root/projects/whatsapp-bot/assets/audios/s5.wav -i /root/projects/whatsapp-bot/assets/default/WEEK.wav -i /root/projects/whatsapp-bot/assets/audios/s6.wav -i /root/projects/whatsapp-bot/assets/users/${_id}/place.wav -i /root/projects/whatsapp-bot/assets/audios/s7.wav -i /root/projects/whatsapp-bot/assets/users/${_id}/gothra.wav -i /root/projects/whatsapp-bot/assets/audios/s8.wav -i /root/projects/whatsapp-bot/assets/users/${_id}/birth_moon_sign.wav -i /root/projects/whatsapp-bot/assets/audios/s9.wav -i /root/projects/whatsapp-bot/assets/users/${_id}/birth_moon_nakshatra.wav -i /root/projects/whatsapp-bot/assets/audios/s10.wav -i /root/projects/whatsapp-bot/assets/users/${_id}/name.wav -i /root/projects/whatsapp-bot/assets/audios/s11.wav -filter_complex [0:0][1:0][2:0][3:0][4:0][5:0][6:0][7:0][8:0][9:0][10:0][11:0][12:0][13:0][14:0][15:0][16:0][17:0][18:0][19:0][20:0]concat=n=21:v=0:a=1[out]  -map [out] /root/projects/whatsapp-bot/assets/users/${_id}/Sankalpampart1.wav`;
       combine(command, function() {
         return;
       });
-    }
-	console.log("!Done");
     return true;
+  } catch (e) {
+    console.log(e);
+    return e;
+  }
 };
 
 function combine(command, cb) {
   exec(command, (error, stdout, stderr) => {
     if (error) {
       console.log(error);
+      console.log(stdout);
+      console.log(stderr);
       cb(stderr);
     } else {
       cb(stdout);
@@ -276,7 +279,7 @@ const sendNotificationToMessenger = async () => {
             payload: {
               url: `https://cxb1.s3.amazonaws.com/aipundit/prayer_${
                 user.fbmsn_id
-              }_${new Date(data.prediction_date).toLocaleDateString()}.wav`,
+              }_${new Date(data.prediction_date).getTime()}.wav`,
               is_reusable: true
             }
           }

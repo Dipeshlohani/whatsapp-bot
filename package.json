@@ -2,15 +2,10 @@
   "name": "whatsapp-bot",
   "version": "1.0.0",
   "main": "app.js",
-  "nodemonConfig": {
-    "ignore": [
-      "*.json"
-    ]
-  },
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "node ./bin/www",
     "production": "NODE_ENV=production node ./bin/www",
-    "dipesh": "node app.js",
+    "dipesh" : "node app.js",
     "client": "cross-env NODE_ENV=development cd ./client && yarn start",
     "all": "cross-env NODE_ENV=development npm-run-all -p start client",
     "build": "cross-env NODE_ENV=production yarn install && cd ./client && yarn install && yarn run build"
@@ -39,8 +34,5 @@
     "morgan": "^1.9.1",
     "speak-tts": "^2.0.8",
     "twilio": "^3.38.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.2"
   }
 }

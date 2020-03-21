@@ -10,12 +10,10 @@ class Nakshatra {
       $("textarea[name=emotion_prediction]").val(data.prediction.emotions);
       $("textarea[name=profession_prediction]").val(data.prediction.profession);
       $("textarea[name=luck_prediction]").val(data.prediction.luck);
-      $("textarea[name=personallife_prediction]").val(
-        data.prediction.personal_life
-      );
+      $("textarea[name=personallife_prediction]").val(data.prediction.personal_life);
       $("textarea[name=travel_prediction]").val(data.prediction.travel);
       if (data.sentiment) {
-        $('select[name="health_sentiment"]').val(data.sentiment.health);
+         $('select[name="health_sentiment"]').val(data.sentiment.health);
         $('select[name="emotion_sentiment"]').val(data.sentiment.emotions);
         $('select[name="profession_sentiment"]').val(data.sentiment.profession);
         $('select[name="luck_sentiment"]').val(data.sentiment.luck);
@@ -23,10 +21,10 @@ class Nakshatra {
           data.sentiment.personal_life
         );
         $('select[name="travel_sentiment"]').val(data.sentiment.travel);
-        $(".js-select2")
+      }
+	 $(".js-select2")
           .select2()
           .trigger("change");
-      }
     });
   }
   updateSentiment(id) {

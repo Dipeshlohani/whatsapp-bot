@@ -1,293 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=100%, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=100%, initial-scale=1.0" />
     <title>Users</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
     <!--===============================================================================================-->
 
-    <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="fonts/iconic/css/material-design-iconic-font.min.css"
+    />
     <!--===============================================================================================-->
 
-    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css" />
 
-    <link rel="stylesheet" type="text/css" href="css/util.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/util.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
     <!--===============================================================================================-->
 
     <style>
       table {
-        width: 100%; 
-        padding-right:10px; 
+        width: 100%;
+        padding-right: 10px;
       }
-        .sidebar-container {
-            position: fixed;
-            width: 260px;
-            height: 100%;
-            left: 0;
-            overflow-x: hidden;
-            overflow-y: auto;
-            background: #1a1a1a;
-            color: #fff;
-        }
 
-        .content-container {
-            padding-top: 20px;
-        }
+      .sidebar-container {
+        position: fixed;
+        width: 260px;
+        height: 100%;
+        left: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        background: #1a1a1a;
+        color: #fff;
+      }
 
-        .sidebar-logo {
-            padding: 0 auto;
-            background: #1A1A1A; 
-            height: auto;
-        }
+      .content-container {
+        padding-top: 20px;
+      }
 
-        .sidebar-navigation {
-            padding: 0;
-            margin: 0;
-            list-style-type: none;
-            position: relative;
-        }
+      .sidebar-logo {
+        padding: 0 auto;
+        background: #1a1a1a;
+        height: auto;
+      }
 
-        .sidebar-navigation li {
-            background-color: transparent;
-            position: relative;
-            display: inline-block;
-            width: 100%;
-            line-height: 20px;
-        }
+      .sidebar-navigation {
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+        position: relative;
+      }
 
-        .sidebar-navigation li a {
-            padding: 10px 15px 10px 30px;
-            display: block;
-            color: #fff;
-        }
+      .sidebar-navigation li {
+        background-color: transparent;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        line-height: 20px;
+      }
 
-        .sidebar-navigation li .fa {
-            margin-right: 10px;
-        }
+      .sidebar-navigation li a {
+        padding: 10px 15px 10px 30px;
+        display: block;
+        color: #fff;
+      }
 
-        .sidebar-navigation li a:active,
-        .sidebar-navigation li a:hover,
-        .sidebar-navigation li a:focus {
-            text-decoration: none;
-            outline: none;
-        }
+      .sidebar-navigation li .fa {
+        margin-right: 10px;
+      }
 
-        .sidebar-navigation li::before {
-            background-color: #2574A9;
-            position: absolute;
-            content: '';
-            height: 100%;
-            left: 0;
-            top: 0;
-            -webkit-transition: width 0.2s ease-in;
-            transition: width 0.2s ease-in;
-            width: 3px;
-            z-index: -1;
-        }
+      .sidebar-navigation li a:active,
+      .sidebar-navigation li a:hover,
+      .sidebar-navigation li a:focus {
+        text-decoration: none;
+        outline: none;
+      }
 
-        .sidebar-navigation li:hover::before {
-            width: 100%;
-        }
+      .sidebar-navigation li::before {
+        background-color: #2574a9;
+        position: absolute;
+        content: "";
+        height: 100%;
+        left: 0;
+        top: 0;
+        -webkit-transition: width 0.2s ease-in;
+        transition: width 0.2s ease-in;
+        width: 3px;
+        z-index: -1;
+      }
 
-        .sidebar-navigation .header {
-            font-size: 12px;
-            text-transform: uppercase;
-            background-color: #151515;
-            padding: 10px 15px 10px 30px;
-        }
-         h6{
-             font-size: 18px;
-             line-height: 25px;
-         }
+      .sidebar-navigation li:hover::before {
+        width: 100%;
+      }
 
-        .sidebar-navigation .header::before {
-            background-color: transparent;
-        }
+      .sidebar-navigation .header {
+        font-size: 12px;
+        text-transform: uppercase;
+        background-color: #151515;
+        padding: 10px 15px 10px 30px;
+      }
 
-        .content-container {
-            padding-left: 220px;
-        }
+      h6 {
+        font-size: 18px;
+        line-height: 25px;
+      }
+
+      .sidebar-navigation .header::before {
+        background-color: transparent;
+      }
+
+      .content-container {
+        padding-left: 220px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="row">
-        <div class="col-md-2 col-sm-2">
-            <div class="sidebar-container">
-                <div class="sidebar-logo text-center"><br /><br />
-                <img src="/images/icons/logo.png" width="100%" height="auto"> 
-                </div><br /><br /><br />
-                <ul class="sidebar-navigation">
-                    <li>
-                        <a href="/">
-                            <h6><i class="fa fa-home" aria-hidden="true"></i>Homepage</h6>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/config">
-                            <h6><i class="fa fa-clipboard" aria-hidden="true"></i>Sankalpam</h6>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/user/add">
-                            <h6><i class="fa fa-users" aria-hidden="true"></i>Add User</h6>
-                        </a>
-                    </li>
+      <div class="col-md-2 col-sm-2">
+        <div class="sidebar-container">
+          <div class="sidebar-logo text-center">
+            <br /><br />
+            <img src="/images/icons/LOGO.png" width="100%" height="auto" />
+          </div>
+          <br /><br /><br />
+          <ul class="sidebar-navigation">
+            <li>
+              <a href="/">
+                <h6><i class="fa fa-home" aria-hidden="true"></i>Homepage</h6>
+              </a>
+            </li>
+            <li>
+              <a href="/config">
+                <h6><i class="fa fa-clipboard" aria-hidden="true"></i>Sankalpam</h6>
+              </a>
+            </li>
+            <li>
+              <a href="/user/add">
+                <h6><i class="fa fa-users" aria-hidden="true"></i>Add User</h6>
+              </a>
+            </li>
 
-                    <li>
-                        <a href="/nakshatra">
-                            <h6><i class="fa fa-star" aria-hidden="true"></i>Nakshatra</h6>
-                        </a>
-                    </li>
+            <li>
+              <a href="/nakshatra">
+                <h6><i class="fa fa-star" aria-hidden="true"></i>Nakshatra</h6>
+              </a>
+            </li>
 
-                    <li>
-                        <a href="#">
-                            <h6><i class="fa fa-info-circle" aria-hidden="true"></i>Settings</h6>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            <li>
+              <a href="#">
+                <h6><i class="fa fa-info-circle" aria-hidden="true"></i>Settings</h6>
+              </a>
+            </li>
+          </ul>
         </div>
-        <div class="col-md-10 col-sm-10">
-        <div class="pos-f-t"  style="background-color: #1a1a1a;">
-            <!-- <div class="collapse" id="navbarToggleExternalContent">
+      </div>
+      <div class="col-md-10 col-sm-10">
+        <div class="pos-f-t" style="background-color: #1a1a1a;">
+          <!-- <div class="collapse" id="navbarToggleExternalContent">
                 
             </div> -->
-            <nav class="navbar navbar-dark">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"
-                    aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div>
-                    <h4 class="text-white">AI PANDIT <small class="text-white" style="font-family: cursive; font-size: 15px;">Your
-                            digital pandit</small> </h4>
-                </div>
-            </nav>
+          <nav class="navbar navbar-dark">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarToggleExternalContent"
+              aria-controls="navbarToggleExternalContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div>
+              <h4 class="text-white">
+                AI PANDIT
+                <small class="text-white" style="font-family: cursive; font-size: 15px;"
+                  >Your digital pandit</small
+                >
+              </h4>
+            </div>
+          </nav>
         </div>
 
-            <table id="uTable" class="table table-striped table-bordered" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Birth Moon Sign</th>
-                        <th>Nakshatra</th>
-                        <th>Date of Birth</th>
-                        <th>Gothra</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-
-        </div>
+        <table id="uTable" class="table table-striped table-bordered" style="width:100%">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Birth Moon Sign</th>
+              <th>Nakshatra</th>
+              <th>Gothra</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
     </div>
-
-
-
-
 
     <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script>
-
-        function updateSentiment(id) {
-            $("#u_id").val(id);
-        }
-        let uTable;
-        $(document).ready(function () {
-
-            uTable = $('#uTable').DataTable({
-                processing: true,
-                "paging": true,
-                dom: "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4'i><'col-sm-8'<'float-right p-2'p>>>",
-                ajax: {
-                    url: "/api/v1/user",
-                    // beforeSend: function (request) {
-                    //     request.setRequestHeader("access_token", $.cookie("access_token"));
-                    // },
-                    dataFilter: data => {
-                        let json = JSON.parse(data);
-                        json.recordsTotal = json.total;
-                        json.recordsFiltered = json.total;
-                        return JSON.stringify(json);
-                    },
-                    data: function (d) {
-                        return $.extend({}, { start: d.start, limit: d.limit, total: d.length });
-                    }
-                },
-                columns: [
-                    {
-                        data: null,
-                        render: d => `${d.name || "N / A"}`
-                    },
-                    {
-                        data: null,
-                        render: d => `${d.gender || "N / A"}`
-                    },
-                    {
-                        data: "phone"
-                    },
-                    {
-                        data: "gothra"
-                    },
-                    {
-                        data: "created_at"
-                    },
-                    {
-                        data: null,
-                        className: "sentiment",
-                        render: d => {
-                            return `<button class="btn btn-dark" data-toggle="modal" data-target="#mdlSentiment" onclick="updateSentiment('${d._id}')"><i class="fa fa-user"></i></button>
-                            <button class="btn btn-dark" data-toggle="modal" data-target="#mdlSentiment" onclick="updateSentiment('${d._id}')"><i class="fa fa-remove"></i></button>
-                            `;
-                        }
-                    }
-                ]
-
-            });
-
+      function updateSentiment(id) {
+        $("#u_id").val(id);
+      }
+      let uTable;
+      $(document).ready(function() {
+        uTable = $("#uTable").DataTable({
+          processing: true,
+          paging: true,
+          dom: "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-4'i><'col-sm-8'<'float-right p-2'p>>>",
+          ajax: {
+            url: "/api/v1/user",
+            // beforeSend: function (request) {
+            //     request.setRequestHeader("access_token", $.cookie("access_token"));
+            // },
+            dataFilter: data => {
+              let json = JSON.parse(data);
+              json.recordsTotal = json.total;
+              json.recordsFiltered = json.total;
+              return JSON.stringify(json);
+            },
+            data: function(d) {
+              return $.extend({}, { start: d.start, limit: d.limit, total: d.length });
+            }
+          },
+          columns: [
+            {
+              data: "name"
+            },
+            {
+              data: "birth_moon_sign"
+            },
+            {
+              data: "birth_moon_nakshatra"
+            },
+            {
+              data: "gothra"
+            }
+          ]
         });
-
+      });
     </script>
-
-</body>
-
+  </body>
 </html>
 
-<div class="modal fade" id="mdlSentiment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="container-contact100">
-            <form class="frmConfig validate-form">
-                <span class="contact100-form-title">
-                    Update Details
-                </span>
-                <!-- <input type='text' id="u_id" /> -->
-                <div class="wrap-input100 validate-input bg1" data-validate="Please Type Year">
-                    <span class="label-input100">YEAR*</span>
-                    <input class="input100" type="text" name="year" placeholder="Enter Year">
-                </div>
-                <div class="wrap-input100 validate-input bg1" data-validate="Please Type Month">
-                    <span class="label-input100">MONTH*</span>
-                    <input class="input100" type="text" name="month" placeholder="Enter Month">
-                </div>
-
-                <div class="container-contact100-form-btn">
-                    <button class="contact100-form-btn">
-                        <span>
-                            Submit
-                            <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
-                        </span>
-                    </button>
-                </div>
-            </form>
+<div
+  class="modal fade"
+  id="mdlSentiment"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="container-contact100">
+      <form class="frmConfig validate-form">
+        <span class="contact100-form-title">
+          Update Details
+        </span>
+        <!-- <input type='text' id="u_id" /> -->
+        <div class="wrap-input100 validate-input bg1" data-validate="Please Type Year">
+          <span class="label-input100">YEAR*</span>
+          <input class="input100" type="text" name="year" placeholder="Enter Year" />
         </div>
+        <div class="wrap-input100 validate-input bg1" data-validate="Please Type Month">
+          <span class="label-input100">MONTH*</span>
+          <input class="input100" type="text" name="month" placeholder="Enter Month" />
+        </div>
+
+        <div class="container-contact100-form-btn">
+          <button class="contact100-form-btn">
+            <span>
+              Submit
+              <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+            </span>
+          </button>
+        </div>
+      </form>
     </div>
+  </div>
 </div>

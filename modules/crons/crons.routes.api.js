@@ -46,13 +46,8 @@ router.get("/save_audio_files", async (req, res, next) => {
   }
 });
 
-router.get("/send_notification_to_messenger", async (req, res, next) => {
-  try {
-    await cronHandler.sendNotificationToMessenger();
-    res.sendStatus(200);
-  } catch (e) {
-    console.log(e);
-  }
-});
+router.get("/send_notification_to_messenger", (req, res, next) => {
+   cronHandler.sendNotificationToMessenger().then(d=> res.sendStatus(200)).catch(e=> next);
+ });
 
 module.exports = router;
