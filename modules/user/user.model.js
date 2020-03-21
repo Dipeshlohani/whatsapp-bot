@@ -52,12 +52,10 @@ const UserSchema = mongoose.Schema(
       },
       coordinates: {
         longitude: {
-          type: Number,
-          required: true
+          type: Number
         },
         latitude: {
-          type: Number,
-          required: true
+          type: Number
         }
       }
     },
@@ -72,12 +70,10 @@ const UserSchema = mongoose.Schema(
       },
       coordinates: {
         longitude: {
-          type: Number,
-          required: true
+          type: Number
         },
         latitude: {
-          type: Number,
-          required: true
+          type: Number
         }
       }
     },

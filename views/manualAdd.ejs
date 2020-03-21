@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Add User Detail</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css" />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/fonts/iconic/css/material-design-iconic-font.min.css"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendor/animsition/css/animsition.min.css" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendor/daterangepicker/daterangepicker.css" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendor/noui/nouislider.min.css" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/css/util.css" />
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <!--===============================================================================================-->
+  </head>
+
+  <body>
+    <script>
+      var fbmsn_id;
+    </script>
+
+    <script>
+      (function(d, s, id) {
+        var js,
+          fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+          return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/messenger.Extensions.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      })(document, "script", "Messenger");
+      window.extAsyncInit = function() {
+        MessengerExtensions.getContext(
+          "1020798478301490",
+          function success(thread_context) {
+            fbmsn_id = thread_context.psid;
+          },
+          function error(err) {
+            console.log(err);
+            // error
+          }
+        );
+      };
+    </script>
+
+    <div class="container-contact100">
+      <div class="wrap-contact100">
+        <form class="contact100-form validate-form">
+          <span class="contact100-form-title">
+            Add Profile
+          </span>
+
+          <div class="wrap-input100 validate-input bg1" data-validate="Please Type Your Name">
+            <span class="label-input100">FULL NAME *</span>
+            <input class="input100" type="text" name="name" placeholder="Enter Your Name" />
+          </div>
+          <div class="wrap-input100 input100-select bg1 rs1-wrap-input100">
+            <span class="label-input100">Gender *</span>
+            <div>
+              <select class="js-select2" name="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+              <div class="dropDownSelect2"></div>
+            </div>
+          </div>
+
+          <div
+            class="wrap-input100 bg1 validate-input rs1-wrap-input100"
+            data-validate="Please type your place of birth"
+          >
+            <span class="label-input100">Place of birth *</span>
+            <input
+              class="input100"
+              type="text"
+              name="pob"
+              placeholder="Enter your place of birth"
+            />
+          </div>
+
+          <div
+            class="wrap-input100 validate-input bg1"
+            data-validate="Please type your current location"
+          >
+            <span class="label-input100">Current Location *</span>
+            <input
+              class="input100"
+              type="text"
+              name="currentLocation"
+              placeholder="Enter Your current location"
+            />
+          </div>
+
+          <div
+            class="wrap-input100 validate-input bg1 rs1-wrap-input100"
+            data-validate="Enter your phone number"
+          >
+            <span class="label-input100">Phone Number *</span>
+            <input
+              class="input100"
+              type="text"
+              name="phone"
+              placeholder="Enter your phone number "
+            />
+          </div>
+
+          <div class="wrap-input100 bg1 validate-input rs1-wrap-input100">
+            <span class="label-input100">Gothra *</span>
+            <input
+              class="input100"
+              type="text"
+              name="gothra"
+              placeholder="Enter your place of birth"
+            />
+          </div>
+          <div class="wrap-input100 bg1">
+            <span class="label-input100">Date of birth ( DD / MM / YYYY HH : MM ) *</span><br />
+            <input
+              type="text"
+              class="input100"
+              id="datetime12"
+              data-format="DD-MM-YYYY h:mm a"
+              name="dob"
+              data-template="DD / MM / YYYY hh : mm a"
+              name="datetime"
+              value="21-12-2012 8:30 pm"
+            />
+          </div>
+
+          <div class="container-contact100-form-btn">
+            <button class="btn contact100-form-btn" type="button">
+              <span>
+                Submit
+                <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!--===============================================================================================-->
+    <script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- <script src="js/jquery.js"></script> -->
+    <script src="/js/moment.min.js"></script>
+    <script src="/js/combodate.js"></script>
+    <!--===============================================================================================-->
+    <script src="/vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/vendor/bootstrap/js/popper.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/index.js"></script>
+    <!--===============================================================================================-->
+    <script src="/vendor/select2/select2.min.js"></script>
+    <script>
+      function dobParser(dob) {
+        return {
+          year: dob.split(" ")[0].split("-")[2],
+          month: dob.split(" ")[0].split("-")[1],
+          day: dob.split(" ")[0].split("-")[0],
+          hour: dob.split(" ")[1].split(":")[0],
+          min: dob.split(" ")[1].split(":")[1]
+        };
+      }
+
+      $(".btn").click(function() {
+        // let shift = dob.split(" ")[2]; //to do am or pm string conversion
+        let data = {
+          name: $("input[name=name]").val(),
+          gender: $("select[name=gender]").val(),
+          pob: {
+            place: $("input[name=pob]").val()
+          },
+          currentLocation: {
+            place: $("input[name=currentLocation]").val()
+          },
+          phone: $("input[name=phone]").val(),
+          gothra: $("input[name=gothra]").val(),
+          dob: dobParser($("input[name=dob]").val()),
+          fbmsn_id: fbmsn_id
+        };
+        $.ajax({
+          url: "/api/v1/user",
+          type: "POST",
+          data
+        })
+          .then(d => {
+            MessengerExtensions.requestCloseBrowser();
+          })
+          .fail(e => {
+		
+            //console.log(e.responseJSON.message);
+          });
+      });
+      $("#datetime12").combodate({
+        minYear: 1975,
+        maxYear: new Date().getFullYear(),
+        minuteStep: 1
+      });
+      $(".js-select2").each(function() {
+        $(this).select2({
+          minimumResultsForSearch: 20,
+          dropdownParent: $(this).next(".dropDownSelect2")
+        });
+      });
+    </script>
+    <!--===============================================================================================-->
+    <script src="/vendor/daterangepicker/moment.min.js"></script>
+    <script src="/vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="/vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <!--===============================================================================================-->
+    <script src="/js/main.js"></script>
+  </body>
+</html>

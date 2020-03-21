@@ -5,7 +5,8 @@ class Facebook {
     this.token = access_token;
   }
   async sendMessage(payload) {
-    let message;
+try {
+ let message;
     if (payload.attachment) {
       message = {
         attachment: payload.attachment
@@ -32,6 +33,10 @@ class Facebook {
     });
     console.log(response.data);
     return response.data;
+} catch(e) {
+	console.log(e);
+}
+   
   }
 }
 
