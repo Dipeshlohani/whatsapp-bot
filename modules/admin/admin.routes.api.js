@@ -3,7 +3,7 @@ const config=require("config");
 const AdminController=require("./admin.controller");
 const jwt=require("jsonwebtoken");
 
-router.post("/login",(req,res,next)=>{
+router.post("/login",async(req,res,next)=>{
     let payload=req.body;
     try {
         let data=await AdminController.checkAuth(payload);

@@ -3,7 +3,8 @@ class Nakshatra {
   getDetail(id) {
     $.ajax({
       url: `/api/v1/astro/${id}`,
-      method: "GET"
+      method: "GET",
+      headers: { Authorization: "Bearer " + Cookies.get("token") }
     }).done(data => {
       $("input[name=birth_moon_nakshatra]").val(data.birth_moon_nakshatra);
       $("textarea[name=health_prediction]").val(data.prediction.health);
@@ -41,6 +42,7 @@ class Nakshatra {
     $.ajax({
       method: "PATCH",
       url: `/api/v1/astro/flag/update/${id}`,
+      headers: { Authorization: "Bearer " + Cookies.get("token") },
       data
     })
       .done(d => {

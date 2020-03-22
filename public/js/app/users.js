@@ -18,6 +18,7 @@ class User {
       ajax: {
         url: "/api/v1/user",
         method: "GET",
+        headers: { Authorization: "Bearer " + Cookies.get("token") },
         dataFilter: data => {
           let json = JSON.parse(data);
           json.recordsTotal = json.total;
