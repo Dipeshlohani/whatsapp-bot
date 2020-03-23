@@ -9,23 +9,34 @@ class Welcome {
   async sendResponse() {
     // let phone = this.agent.originalRequest.payload.data.From;
     // phone = phone.replace("whatsapp:", "");
-
-    let data = await welcomeController.getUser(this.agent.originalRequest.payload.data.sender.id);
+    let data = await welcomeController.getUser(
+      this.agent.originalRequest.payload.data.sender.id
+    );
     if (data) {
       this.agent.add(`Hi ${data.name}. You've already registered.Please enter 1 to do it again.`);
     } else {
       this.agent.add(
         "Hi there I am A.I. Pundit powered by OnMyMobile. I will send daily predictions, do custom puja as per astrology predictions and suggest a seva in nearby temple based on your birth chart."
       );
-      this.agent.add(" Enter 1 for English, 2 for Telugu");
+      this.agent.add("Lets get started. Type 1 to fill a form");
     }
   }
 
+  async updatePrediction() {
+    let parameters = this.agent.parameters;
+    let id = this.agent.originalRequest.payload.data.sender.id;
+      let data  = await welcomeController.updatePredictionStatus(id,parameters.navigation);
+      if(data.isActive === true) this.agent.add("You'll start getting predictions from now on. Type stop anytime to stop receiving notifications from us."); 
+      else this.agent.add("You'll stop receiving notification from now on. Please type start anytime to start receiving notifications from us.") 
+  }
+
   async saveUser() {
+    //
+    // NOT USING THIS ANYMORE
+    //
     //Don't delete this
     // let phone = this.agent.originalRequest.payload.data.From;
     // phone = phone.replace("whatsapp:", "");
-    console.log(this.agent.parameters);
     const fbmsn_id = this.agent.originalRequest.payload.data.sender.id;
     let { person, gender, date, time, pob, gothra, current_location } = this.agent.parameters;
     let { name } = person;
@@ -40,7 +51,8 @@ class Welcome {
       current_location,
       date,
       gothra,
-      fbmsn_id
+      fbmsn_id,
+      isActive : true
     });
     let { sign, Naksahtra } = await welcomeUtils.getAstroDetails(detail.pob, detail.dob);
     this.agent.add(

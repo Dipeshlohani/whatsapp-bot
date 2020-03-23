@@ -248,43 +248,45 @@ const sendNotificationToMessenger = async () => {
     let users = await UserModel.find({});
     if(!users.length) throw Error("Users Not Found");
     for (let user of users) {
-      let data = await NakshatraModel.findOne({
-        birth_moon_nakshatra: user.birth_moon_nakshatra
-      });
-           if (
-        new Date(data.prediction_date).toLocaleDateString() ==
-        new Date().toLocaleDateString()
-      ) {
-        let PSID = user.fbmsn_id;
-        let { prediction } = data;
-        let payload;
+      if (users.isActive === true) {
+        let data = await NakshatraModel.findOne({
+          birth_moon_nakshatra: user.birth_moon_nakshatra
+        });
+        if (
+          new Date(data.prediction_date).toLocaleDateString() ==
+          new Date().toLocaleDateString()
+        ) {
+          let PSID = user.fbmsn_id;
+          let { prediction } = data;
+          let payload;
 
-        let message = `Hi ${user.name} here are your prediction for today. \n 1) Health: ${prediction.health} \n 2) Emotions:${prediction.emotions} \n 3) Profession: ${prediction.profession} \n  4) Luck: ${prediction.luck} \n  5) Personal Life: ${prediction.personal_life} \n 6) Travel: ${prediction.travel} `;
+          let message = `Hi ${user.name} here are your prediction for today. \n 1) Health: ${prediction.health} \n 2) Emotions:${prediction.emotions} \n 3) Profession: ${prediction.profession} \n  4) Luck: ${prediction.luck} \n  5) Personal Life: ${prediction.personal_life} \n 6) Travel: ${prediction.travel} `;
 
-        payload = {
-          id: PSID,
-          text: message
-        };
-        await FB.sendMessage(payload);
-        let message2 = `Here is a customized prayer for you. This prayer is from you to Almighty to thank him for the positive predictions, guide you for average predictions and help you to overcome the negative predictions with human will. You can chat the prayer along with the voice.`;
-        payload = {
-          id: PSID,
-          text: message2
-        };
-        await FB.sendMessage(payload);
-        payload = {
-          id: PSID,
-          attachment: {
-            type: "audio",
-            payload: {
-              url: `https://cxb1.s3.amazonaws.com/aipundit/prayer_${
-                user.fbmsn_id
-              }_${new Date(data.prediction_date).getTime()}.wav`,
-              is_reusable: true
+          payload = {
+            id: PSID,
+            text: message
+          };
+          await FB.sendMessage(payload);
+          let message2 = `Here is a customized prayer for you. This prayer is from you to Almighty to thank him for the positive predictions, guide you for average predictions and help you to overcome the negative predictions with human will. You can chat the prayer along with the voice.`;
+          payload = {
+            id: PSID,
+            text: message2
+          };
+          await FB.sendMessage(payload);
+          payload = {
+            id: PSID,
+            attachment: {
+              type: "audio",
+              payload: {
+                url: `https://cxb1.s3.amazonaws.com/aipundit/prayer_${
+                  user.fbmsn_id
+                }_${new Date(data.prediction_date).getTime()}.wav`,
+                is_reusable: true
+              }
             }
-          }
-        };
-        await FB.sendMessage(payload);
+          };
+          await FB.sendMessage(payload);
+        }
       }
     }
     return true;

@@ -20,6 +20,11 @@ router.post("/", async (req, res, next) => {
   intentMap.set("Default Welcome Intent", () => {
     return welcome.sendResponse();
   });
+  
+
+   intentMap.set("StartStopPrediction", () => {
+     return welcome.updatePrediction();
+   });
 
   intentMap.set("DetailedInfoIntent", () => {
     return welcome.saveUser();

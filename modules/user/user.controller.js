@@ -26,6 +26,7 @@ class Controller {
     };
     let { sign, Naksahtra } = await Utils.getAstroDetails(pob, payload.dob);
     payload.pob = pob;
+    payload.isActive = true;
     payload.currentLocation = currentLocation;
     payload.birth_moon_sign = sign;
     payload.birth_moon_nakshatra = Naksahtra;

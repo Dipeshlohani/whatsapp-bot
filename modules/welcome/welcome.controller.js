@@ -9,6 +9,10 @@ class Controller {
     return;
   }
 
+  updatePredictionStatus(id,status) {
+    return UserModel.findOneAndUpdate({ fbmsn_id: id }, { isActive: status });
+  }
+
   async updateUser(id, payload) {
     return await UserModel.findOneAndUpdate(
       { _id: id },
