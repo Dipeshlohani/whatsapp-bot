@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const Controller = require("./astrology.controller.js");
-
-router.patch("/flag/update/:id", async (req, res, next) => {
+const SecureAPI=require("../../utils/secureUI.js");
+router.patch("/flag/update/:id",SecureAPI(), async (req, res, next) => {
   let id = req.params.id;
   let payload = req.body;
   try {
@@ -11,7 +11,7 @@ router.patch("/flag/update/:id", async (req, res, next) => {
     return res.json(e);
   }
 });
-router.get("/", async (req, res, next) => {
+router.get("/",SecureAPI(), async (req, res, next) => {
   let limit = parseInt(req.query.limit) || 27;
   let start = parseInt(req.query.start) || 0;
   let page = parseInt(start) / parseInt(limit) + 1;
@@ -22,7 +22,7 @@ router.get("/", async (req, res, next) => {
     return e;
   }
 });
-router.get("/:id", async (req, res, next) => {
+router.get("/:id",SecureAPI(), async (req, res, next) => {
   const data = await Controller.getById(req.params.id);
   try {
     res.json(data);
