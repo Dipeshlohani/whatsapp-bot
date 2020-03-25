@@ -307,4 +307,4 @@ const sendNakshatraNotification = async () => {
     return true;
 };
 
-module.exports = { getAllNakshatras, userDetailTTS, configTTS,  combineTTS, saveAudiofiles, sendNotificationToMessenger};
+ module.exports = { getAllNakshatras, userDetailTTS, configTTS,  combineTTS, saveAudiofiles, sendNotificationToMessenger};
