@@ -6,7 +6,6 @@ router.get("/",SecureUI(), (req, res, next) => {
   res.render("users");
 });
 router.get("/login", function(req, res, next) {
-  console.log("hello");
   res.render("login", { title: "AI pandit Login" });
 });
 router.get("/logout", async (req, res, next) => {
