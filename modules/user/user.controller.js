@@ -39,7 +39,7 @@ class Controller {
       id: PSID,
       text: message
     };
-    await FB.sendMessage(payload);
+    await FB.sendInstantMessage(payload);
     await userDetailTTS(data);
     await combineTTS(data);
     return data;
