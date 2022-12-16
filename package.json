@@ -24,7 +24,7 @@
     "cookie-parser": "^1.4.4",
     "cross-env": "^6.0.3",
     "dialogflow-fulfillment": "^0.6.1",
-    "ejs": "^3.0.1",
+    "ejs": "^3.1.7",
     "express": "^4.17.3",
     "ffmpeg": "^0.0.4",
     "fluent-ffmpeg": "^2.1.2",
